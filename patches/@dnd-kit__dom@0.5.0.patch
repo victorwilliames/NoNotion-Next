@@ -1,0 +1,32 @@
+diff --git a/sortable.cjs b/sortable.cjs
+index 2e79126b64ac7dc7c1ef7a80d222fff0d77ee4e4..405ce5b1bb13a5d5d95a202eff76dda9f764446a 100644
+--- a/sortable.cjs
++++ b/sortable.cjs
+@@ -580,8 +580,9 @@ var OptimisticSortingPlugin = class extends abstract.Plugin {
+   }
+ };
+ function reorder(sourceElement, sourceIndex, targetElement, targetIndex) {
+-  const position = targetIndex < sourceIndex ? "afterend" : "beforebegin";
+-  targetElement.insertAdjacentElement(position, sourceElement);
++  // PATCHED (nonotion): skip direct DOM move; React re-renders from setTableData.
++  // The optimistic insertAdjacentElement conflicts with React 19 reconciliation
++  // and crashes with "removeChild: not a child of this node" during board drag-over.
+ }
+ function sortByIndex(a, b) {
+   return a.index - b.index;
+diff --git a/sortable.js b/sortable.js
+index 29f1dbfa879698088751840778705cd7c5e84bd8..ebd23bd7464b73e2ef39dfcc4c67a25e094c2ce7 100644
+--- a/sortable.js
++++ b/sortable.js
+@@ -578,8 +578,9 @@ var OptimisticSortingPlugin = class extends Plugin {
+   }
+ };
+ function reorder(sourceElement, sourceIndex, targetElement, targetIndex) {
+-  const position = targetIndex < sourceIndex ? "afterend" : "beforebegin";
+-  targetElement.insertAdjacentElement(position, sourceElement);
++  // PATCHED (nonotion): skip direct DOM move; React re-renders from setTableData.
++  // The optimistic insertAdjacentElement conflicts with React 19 reconciliation
++  // and crashes with "removeChild: not a child of this node" during board drag-over.
+ }
+ function sortByIndex(a, b) {
+   return a.index - b.index;
