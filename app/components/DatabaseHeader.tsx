@@ -30,8 +30,8 @@ type Props = {
 export function DatabaseHeader({ title, view, onViewChange }: Props) {
   return (
     <div>
-      <h1 className="text-[30px] font-bold leading-[1.25] tracking-tight">{title}</h1>
-      <div role="tablist" aria-label="Views" className="mt-2 flex items-center gap-1">
+      <h1 className="text-[32px] font-bold leading-[1.25] tracking-tight">{title}</h1>
+      <div role="tablist" aria-label="Views" className="mt-4 flex items-center gap-1">
         {VIEWS.map(({ id, label, Icon }) => {
           const active = view === id;
           return (
@@ -43,8 +43,8 @@ export function DatabaseHeader({ title, view, onViewChange }: Props) {
               className={cn(
                 "flex items-center gap-1.5 rounded-md px-2 py-1 text-sm transition-colors",
                 active
-                  ? "font-medium text-foreground"
-                  : "text-muted-foreground hover:bg-accent hover:text-foreground",
+                  ? "bg-accent font-medium text-foreground"
+                  : "text-muted-foreground hover:bg-accent/60 hover:text-foreground",
               )}
             >
               <Icon className="size-[18px] shrink-0" aria-hidden />
