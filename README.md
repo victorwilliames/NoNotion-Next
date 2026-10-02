@@ -1,60 +1,88 @@
 # NoNotion-Next
 
-MVP interno do Grupo IDE: database de tarefas com Table View e Kanban,
-usando os componentes reais do [Notion UI Kit](https://notion-ui.vercel.app/)
-(`@notion-kit/ui` + `@notion-kit/table-view`) sobre Next.js + shadcn.
+Quadro de tarefas interno do Grupo IDE (StudUP + IDE Digital), estilo Notion:
+tabela + kanban das tarefas da equipe, em PT-BR.
+
+Stack: Next.js + `@notion-kit/ui` + `@notion-kit/table-view`.
 
 ## Rodar
 
+Pré-requisitos: Node 18.18+ (ou 20+) e `pnpm`.
+
 ```bash
+git clone https://github.com/victorwilliames/NoNotion-Next.git
+cd NoNotion-Next
 pnpm install
 pnpm dev
 ```
 
-Abre http://localhost:3000 no navegador.
+Abre http://localhost:3000 no navegador. No Antigravity, abre a pasta do
+projeto e roda os mesmos comandos no terminal integrado.
 
-## No Antigravity
+Na primeira instalação o `pnpm install` gera o `pnpm-lock.yaml` — commita ele.
 
-Abre a pasta do projeto no Antigravity e roda os mesmos comandos acima
-no terminal integrado.
+## Estrutura
 
-## O que tem
+```
+app/
+  page.tsx                    → só composição (header + repositório)
+  components/
+    DatabaseHeader.tsx        → título + abas de view estilo Notion (ícone + nome)
+    TaskTable.tsx             → aba Tabela (TableView, layout "table")
+    TaskBoard.tsx             → aba Kanban (TableView, layout "board", agrupado por status)
+    TasksErrorBoundary.tsx    → fallback PT-BR se o TableView quebrar
+    icons.tsx                 → ícones de view do Notion (extraídos do kit)
+lib/
+  tasks/
+    types.ts                  → TaskRow + interface TaskRepository
+    seed.ts                   → 12 tarefas fictícias de exemplo
+    columns.ts                → colunas (Tarefa, Status, Responsável, Prazo)
+    local-repository.ts       → persistência em localStorage (fase single-user)
+patches/                      → patches do pnpm (ver patches/README.md)
+```
 
-- Uma database de tarefas ("Tarefas de Engenharia"), em PT-BR
-- As duas abas usam o MESMO componente oficial `TableView` do
-  `@notion-kit/table-view`, igual à doc
-  (https://notion-ui.vercel.app/docs/blocks/table-view):
-  - Aba **Tabela**: `layout: "table"`
-  - Aba **Kanban**: `layout: "board"`, agrupado por Status via
-    `table.setGroupingColumn("status")` (a mesma API que o botão
-    "Select a grouping property" do kit usa)
-- Nada customizado: nenhum Kanban separado, nenhum componente visual próprio.
-  Só o renderer oficial do kit nas duas views.
-- Arrastar-e-soltar cards entre colunas (atualiza o Status da tarefa)
-- Colunas: Tarefa (título), Status (Backlog / Em andamento / Em revisão / Concluído),
-  Responsável, Prazo
-- 12 tarefas fictícias de exemplo
-- Alterações salvas no navegador (localStorage)
+As duas abas usam o MESMO componente oficial `TableView` do
+`@notion-kit/table-view`, igual à doc
+(https://notion-ui.vercel.app/docs/blocks/table-view). Nada customizado:
+nenhum Kanban separado, nenhum componente visual próprio.
 
-## Nota técnica: patch no @dnd-kit/dom
+## Persistência
 
-O board oficial usa `@dnd-kit` por dentro pro arrastar-e-soltar. A versão
-`0.5.0` tem um bug conhecido (PRs #2099 e #2102 no repo do dnd-kit, ainda
-não mergeados): durante o drag entre colunas, o plugin de ordenação otimista
-move nós do DOM diretamente e o React 19 quebra a reconciliação com o erro
-`removeChild: The node to be removed is not a child of this node`, derrubando
-a página.
+Hoje é `localStorage` (chave `nonotion-tarefas-v1`) — cada navegador tem suas
+próprias tarefas. Toda leitura/escrita passa pela interface `TaskRepository`
+(`lib/tasks/types.ts`); quando o backend entrar, basta trocar a implementação,
+os componentes não mudam.
 
-Como o `TableView` já atualiza os dados via `setTableData` no drag-over
-(o React re-renderiza o preview sozinho), o movimento direto no DOM é
-redundante aqui. O patch em `patches/@dnd-kit__dom@0.5.0.patch`
-(via `patchedDependencies` no `pnpm-workspace.yaml`) desativa só esse
-movimento direto no DOM. Nenhum código do app foi alterado por causa disso:
-continua 100% o `TableView` oficial nas duas abas. Quando o dnd-kit lançar
-a correção oficial, é só remover o patch.
+## Patches
 
-## Limites atuais
+Detalhes em `patches/README.md`. Resumo:
 
-- Sem backend: os dados ficam só no navegador de quem usa (localStorage).
-  Pra equipe usar junto vai precisar de banco + API depois.
+- `patches/@dnd-kit__dom@0.5.0.patch`: corrige o crash de drag do
+  `@dnd-kit/dom` 0.5.0 (PRs #2099 e #2102 no repo do dnd-kit, ainda não
+  mergeados). O plugin de ordenação otimista move nós do DOM diretamente e o
+  React 19 quebra com `removeChild` durante o drag entre colunas. Como o
+  `TableView` já atualiza os dados via `setTableData` no drag-over, o
+  movimento direto no DOM é redundante aqui — o patch desativa só ele.
+  Remover quando o dnd-kit publicar a correção oficial.
+- `patches/@notion-kit__table-view@1.2.0.patch`: traduz ~160 strings da
+  interface pra PT-BR (o kit não tem suporte a locale) + tooltip com o
+  título completo nas células truncadas.
+- `patches/@notion-kit__table-hook@1.2.0.patch`: traduz as opções
+  "Open in" (Lateral / Central / Página inteira).
+
+**Regra: nunca atualize esses pacotes sem regenerar os patches.** As versões
+estão fixadas exatas no `package.json` de propósito — um `pnpm install`
+fresco nunca vai resolver versão nova e quebrar o patch.
+
+## Limites atuais (v0.1/v0.2)
+
+- Sem backend: os dados ficam só no navegador de quem usa. Pra equipe usar
+  junto vai precisar de banco + API (roadmap: Supabase).
 - Sem páginas do Notion: o escopo é só as duas views da database.
+
+## Roadmap
+
+- **v0.1**: MVP single-user PT-BR, testado.
+- **v0.2** (atual): higiene + arquitetura (componentes, `TaskRepository`, docs).
+- **v0.3**: backend Supabase — tarefas compartilhadas em tempo real.
+- **v0.4**: login da equipe + deploy na Vercel.

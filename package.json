@@ -13,9 +13,9 @@
   },
   "dependencies": {
     "@base-ui/react": "^1.8.0",
+    "@dnd-kit/dom": "0.5.0",
     "@notion-kit/table-view": "1.2.0",
     "@notion-kit/ui": "^1.2.0",
-    "@dnd-kit/dom": "0.5.0",
     "class-variance-authority": "^0.7.1",
     "cn": "^0.4.0",
     "lucide-react": "^1.49.0",
