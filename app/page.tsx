@@ -127,6 +127,9 @@ export default function Page() {
 
   const persist = (next: TaskRow[]) => {
     latestRows.current = next;
+    // Nunca sobrescreve a lista salva com array vazio: um onDataChange
+    // espúrio não pode apagar as tarefas do usuário (vazio = reseed).
+    if (!Array.isArray(next) || next.length === 0) return;
     try {
       window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
     } catch {
