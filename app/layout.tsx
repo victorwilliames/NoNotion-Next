@@ -12,7 +12,7 @@ const fontMono = Geist_Mono({
 })
 
 export const metadata = {
-  title: "NoNotion-Next",
+  title: "Tarefas de Engenharia",
   description: "Tarefas do projeto em tabela e kanban, com Notion UI Kit",
 };
 
@@ -23,7 +23,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="en"
+      lang="pt-BR"
       suppressHydrationWarning
       className={cn("antialiased", fontMono.variable, "font-sans", geist.variable)}
     >
