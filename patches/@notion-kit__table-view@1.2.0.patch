@@ -1,0 +1,1292 @@
+diff --git a/dist/plugins-BCCX7gik.mjs b/dist/plugins-BCCX7gik.mjs
+index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b32de17c23 100644
+--- a/dist/plugins-BCCX7gik.mjs
++++ b/dist/plugins-BCCX7gik.mjs
+@@ -26,7 +26,7 @@ import { TimezoneMenu } from "@notion-kit/ui/timezone-menu";
+ //#region src/menus/constants.ts
+ const countMethodHint = {
+ 	[CountMethod.NONE]: {
+-		title: "None",
++		title: "Nenhum",
+ 		label: "",
+ 		desc: "",
+ 		imgSrc: ""
+@@ -62,13 +62,13 @@ const countMethodHint = {
+ 		imgSrc: "https://www.notion.so/images/aggregations/notEmpty.f8f86445.png"
+ 	},
+ 	[CountMethod.CHECKED]: {
+-		title: "Checked",
++		title: "Marcado",
+ 		label: "checked",
+ 		desc: "Counts the number of pages with a checked checkbox for this property.",
+ 		imgSrc: "https://www.notion.so/images/aggregations/checked.559fd230.png"
+ 	},
+ 	[CountMethod.UNCHECKED]: {
+-		title: "Unchecked",
++		title: "Desmarcado",
+ 		label: "unchecked",
+ 		desc: "Counts the number of pages with an unchecked checkbox for this property.",
+ 		imgSrc: "https://www.notion.so/images/aggregations/unchecked.e4120d79.png"
+@@ -108,7 +108,7 @@ function CalcMenu({ id }) {
+ 	const currentMethod = counting.method;
+ 	const selectedMethod = plugin.counting?.flatMap((group) => group.functions).find((method) => method.id === currentMethod);
+ 	return /* @__PURE__ */ jsxs(DropdownMenuGroup, { children: [/* @__PURE__ */ jsx(DropdownMenuCheckboxItem, {
+-		label: "None",
++		label: "Nenhum",
+ 		checked: currentMethod === CountMethod.NONE || !selectedMethod,
+ 		onCheckedChange: () => table.setColumnCountMethod(id, CountMethod.NONE)
+ 	}), plugin.counting?.map((group) => /* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, { label: group.group }), /* @__PURE__ */ jsxs(DropdownMenuContent, {
+@@ -181,7 +181,7 @@ function EditPropMenu({ propId }) {
+ 	const deleteProp = () => table.setColumnInfo(propId, { isDeleted: true });
+ 	return /* @__PURE__ */ jsxs(Fragment, { children: [
+ 		/* @__PURE__ */ jsx(MenuHeader, {
+-			title: "Edit property",
++			title: "Editar propriedade",
+ 			onBack: () => table.setTableMenuState({
+ 				open: true,
+ 				page: TableViewMenuPage.Props
+@@ -198,7 +198,7 @@ function EditPropMenu({ propId }) {
+ 			children: /* @__PURE__ */ jsx(DropdownMenuItem, {
+ 				disabled: true,
+ 				icon: /* @__PURE__ */ jsx(Icon.ArrowSquarePathUpDown, {}),
+-				label: "Type",
++				label: "Tipo",
+ 				children: /* @__PURE__ */ jsx(MenuItemSelect, { children: /* @__PURE__ */ jsxs("div", {
+ 					className: "flex items-center truncate",
+ 					children: [
+@@ -212,7 +212,7 @@ function EditPropMenu({ propId }) {
+ 			closeOnClick: false,
+ 			onClick: openTypesMenu,
+ 			icon: /* @__PURE__ */ jsx(Icon.ArrowSquarePathUpDown, {}),
+-			label: "Type",
++			label: "Tipo",
+ 			children: /* @__PURE__ */ jsx(MenuItemSelect, { children: /* @__PURE__ */ jsxs("div", {
+ 				className: "flex truncate",
+ 				children: [
+@@ -231,7 +231,7 @@ function EditPropMenu({ propId }) {
+ 				className: "flex items-center",
+ 				children: ["AI Autofill", /* @__PURE__ */ jsx("div", {
+ 					className: "ml-1.5 inline-block w-fit self-center rounded-sm bg-blue/10 px-1 py-0.5 text-[11px]/[1.3] font-medium tracking-normal whitespace-nowrap text-blue",
+-					children: "New"
++					children: "Novo"
+ 				})]
+ 			}),
+ 			children: /* @__PURE__ */ jsx(MenuItemSelect, { children: /* @__PURE__ */ jsx("div", {
+@@ -255,13 +255,13 @@ function EditPropMenu({ propId }) {
+ 			/* @__PURE__ */ jsx(DropdownMenuItem, {
+ 				onClick: duplicateProp,
+ 				icon: /* @__PURE__ */ jsx(Icon.Duplicate, {}),
+-				label: "Duplicate property"
++				label: "Duplicar propriedade"
+ 			}),
+ 			/* @__PURE__ */ jsx(DropdownMenuItem, {
+ 				variant: "warning",
+ 				onClick: deleteProp,
+ 				icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
+-				label: "Delete property"
++				label: "Excluir propriedade"
+ 			})
+ 		] })] })
+ 	] });
+@@ -279,16 +279,16 @@ function AddFilterMenu({ root, parentId = "", depth = 1, className }) {
+ 		render: /* @__PURE__ */ jsx(MenuItem, {
+ 			className,
+ 			variant: "secondary",
+-			label: "Add filter rule",
++			label: "Adicionar regra de filtro",
+ 			icon: /* @__PURE__ */ jsx(Icon.Plus, { className: "size-4" })
+ 		})
+ 	}), /* @__PURE__ */ jsx(DropdownMenuContent, { children: /* @__PURE__ */ jsxs(DropdownMenuGroup, { children: [titleRule && /* @__PURE__ */ jsx(DropdownMenuItem, {
+ 		icon: /* @__PURE__ */ jsx(Icon.Plus, { className: "size-4" }),
+-		label: "Add filter rule",
++		label: "Adicionar regra de filtro",
+ 		onClick: () => table.setFilters(appendFilterNode(root, parentId, createFilterRule(titleRule.propertyId, titleRule.operator)))
+ 	}), canAddGroup && /* @__PURE__ */ jsx(DropdownMenuItem, {
+ 		icon: /* @__PURE__ */ jsx(Icon.SquareOnSquarePlus, {}),
+-		label: "Add filter group",
++		label: "Adicionar grupo de filtro",
+ 		desc: "A group to nest more filters",
+ 		onClick: () => table.setFilters(appendFilterNode(root, parentId, createFilterGroup()))
+ 	})] }) })] });
+@@ -809,8 +809,8 @@ function SingleOptionTrigger({ optionsByName }) {
+ 		anchor: triggerRef,
+ 		className: "w-72 p-2",
+ 		children: [/* @__PURE__ */ jsx(ComboboxInput, {
+-			"aria-label": "Search options",
+-			placeholder: "Search options",
++			"aria-label": "Buscar opções",
++			placeholder: "Buscar opções",
+ 			className: "h-7 w-full rounded-md border border-border px-2"
+ 		}), /* @__PURE__ */ jsx(OptionComboboxList, { optionsByName })]
+ 	})] });
+@@ -848,8 +848,8 @@ function MultipleOptionOperand({ options: options$4, optionsByName, value, onVal
+ 					hideClearButton: true,
+ 					className: "pr-9",
+ 					children: /* @__PURE__ */ jsx(ComboboxValue, { children: (selected) => /* @__PURE__ */ jsxs(Fragment, { children: [selected.map((name) => /* @__PURE__ */ jsx(ComboboxChip, { children: name }, name)), /* @__PURE__ */ jsx(ComboboxChipsInput, {
+-						"aria-label": "Search options",
+-						placeholder: "Search options"
++						"aria-label": "Buscar opções",
++						placeholder: "Buscar opções"
+ 					})] }) })
+ 				}), /* @__PURE__ */ jsx(ComboboxClear, {
+ 					"aria-label": "Clear selected options",
+@@ -870,7 +870,7 @@ function OptionComboboxList({ optionsByName }) {
+ }
+ function optionGroups(options$4) {
+ 	return [{
+-		label: "Options",
++		label: "Opções",
+ 		items: options$4.map(({ name }) => name)
+ 	}];
+ }
+@@ -919,7 +919,7 @@ function DateOperand({ rule, root }) {
+ 			children: [/* @__PURE__ */ jsx(SelectTrigger, {
+ 				"aria-label": "Date preset select",
+ 				className: "w-32 border border-border",
+-				children: /* @__PURE__ */ jsx(SelectValue, { placeholder: "Select date" })
++				children: /* @__PURE__ */ jsx(SelectValue, { placeholder: "Selecionar data" })
+ 			}), /* @__PURE__ */ jsx(SelectContent, { children: /* @__PURE__ */ jsx(SelectGroup, { children: DATE_PRESETS.map(({ value, label }) => /* @__PURE__ */ jsx(SelectItem, {
+ 				value,
+ 				label
+@@ -934,35 +934,35 @@ function DateOperand({ rule, root }) {
+ const DATE_PRESETS = [
+ 	{
+ 		value: "today",
+-		label: "Today"
++		label: "Hoje"
+ 	},
+ 	{
+ 		value: "tomorrow",
+-		label: "Tomorrow"
++		label: "Amanhã"
+ 	},
+ 	{
+ 		value: "yesterday",
+-		label: "Yesterday"
++		label: "Ontem"
+ 	},
+ 	{
+ 		value: "one-week-ago",
+-		label: "One week ago"
++		label: "Há uma semana"
+ 	},
+ 	{
+ 		value: "one-week-from-now",
+-		label: "One week from now"
++		label: "Em uma semana"
+ 	},
+ 	{
+ 		value: "one-month-ago",
+-		label: "One month ago"
++		label: "Há um mês"
+ 	},
+ 	{
+ 		value: "one-month-from-now",
+-		label: "One month from now"
++		label: "Em um mês"
+ 	},
+ 	{
+ 		value: "custom",
+-		label: "Custom date"
++		label: "Data personalizada"
+ 	}
+ ];
+ function getDatePreset(value) {
+@@ -1002,7 +1002,7 @@ function CustomDateOperand({ value, timeZone, onValueChange }) {
+ 			render: /* @__PURE__ */ jsx(Button, {
+ 				type: "button",
+ 				className: "h-7 min-w-32 flex-1 justify-start px-2 font-normal",
+-				children: authoritative || "Select date"
++				children: authoritative || "Selecionar data"
+ 			})
+ 		}), /* @__PURE__ */ jsxs(PopoverContent, {
+ 			align: "start",
+@@ -1158,10 +1158,10 @@ function useFilterRuleUpdate(root, ruleId) {
+ //#region src/menus/filter-menu/filter-group-editor.tsx
+ const LOGIC_ITEMS = [{
+ 	value: "and",
+-	label: "And"
++	label: "E"
+ }, {
+ 	value: "or",
+-	label: "Or"
++	label: "Ou"
+ }];
+ function FilterGroupEditor({ group, root, depth, className, testId }) {
+ 	return /* @__PURE__ */ jsxs(MenuGroup, {
+@@ -1313,7 +1313,7 @@ function NodeActions({ id, root, className }) {
+ 	}) }), /* @__PURE__ */ jsx(DropdownMenuContent, { children: /* @__PURE__ */ jsx(DropdownMenuGroup, { children: /* @__PURE__ */ jsx(DropdownMenuItem, {
+ 		variant: "warning",
+ 		icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
+-		label: "Delete",
++		label: "Excluir",
+ 		onClick: () => table.setFilters(removeFilterNode(root, id))
+ 	}) }) })] });
+ }
+@@ -1342,7 +1342,7 @@ function FilterMenu() {
+ 					/* @__PURE__ */ jsx(Separator, {}),
+ 					/* @__PURE__ */ jsx(MenuGroup, { children: /* @__PURE__ */ jsx(MenuItem, {
+ 						icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
+-						label: "Delete filter",
++						label: "Excluir filtro",
+ 						variant: "warning",
+ 						onClick: () => table.clearFilters()
+ 					}) })
+@@ -1391,7 +1391,7 @@ function TypesMenu({ propId, at, menu, back }) {
+ 		});
+ 	};
+ 	return /* @__PURE__ */ jsxs(Fragment, { children: [menu && /* @__PURE__ */ jsx(MenuHeader, {
+-		title: menu === TableViewMenuPage.ChangePropType ? "Change property type" : "New property",
++		title: menu === TableViewMenuPage.ChangePropType ? "Change property type" : "Nova propriedade",
+ 		onBack: back ? () => table.setTableMenuState({
+ 			open: true,
+ 			page: menu === TableViewMenuPage.ChangePropType ? TableViewMenuPage.EditProp : TableViewMenuPage.Props,
+@@ -1412,7 +1412,7 @@ function TypesMenu({ propId, at, menu, back }) {
+ 				onKeyDown: (e) => e.stopPropagation()
+ 			}), /* @__PURE__ */ jsx(AutocompleteContent, {
+ 				variant: "inline",
+-				children: /* @__PURE__ */ jsxs(AutocompleteList, { children: [/* @__PURE__ */ jsxs(AutocompleteGroup, { children: [/* @__PURE__ */ jsx(AutocompleteLabel, { title: "Type" }), /* @__PURE__ */ jsx(AutocompleteCollection, { children: (plugin) => /* @__PURE__ */ jsx(TooltipPreset, {
++				children: /* @__PURE__ */ jsxs(AutocompleteList, { children: [/* @__PURE__ */ jsxs(AutocompleteGroup, { children: [/* @__PURE__ */ jsx(AutocompleteLabel, { title: "Tipo" }), /* @__PURE__ */ jsx(AutocompleteCollection, { children: (plugin) => /* @__PURE__ */ jsx(TooltipPreset, {
+ 					side: "left",
+ 					sideOffset: 6,
+ 					description: plugin.meta.desc,
+@@ -1425,7 +1425,7 @@ function TypesMenu({ propId, at, menu, back }) {
+ 						onClick: () => select$2(plugin.id, plugin.default.name, plugin.default.width),
+ 						children: propType === plugin.id && /* @__PURE__ */ jsx(MenuItemCheck, {})
+ 					})
+-				}, plugin.id) })] }), !propId && search.length > 0 && /* @__PURE__ */ jsxs(AutocompleteGroup, { children: [/* @__PURE__ */ jsx(AutocompleteLabel, { title: "Select to add" }), /* @__PURE__ */ jsx(AutocompleteItem, {
++				}, plugin.id) })] }), !propId && search.length > 0 && /* @__PURE__ */ jsxs(AutocompleteGroup, { children: [/* @__PURE__ */ jsx(AutocompleteLabel, { title: "Selecionar para adicionar" }), /* @__PURE__ */ jsx(AutocompleteItem, {
+ 					value: `search-${search}`,
+ 					icon: /* @__PURE__ */ jsx(DefaultIcon, {
+ 						type: "text",
+@@ -1508,7 +1508,7 @@ function PropMenu({ propId, view }) {
+ 		}),
+ 		/* @__PURE__ */ jsxs(DropdownMenuGroup, { children: [flexRender(uiPlugin.renderConfigMenu, { column }), info.type !== "title" && /* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, {
+ 			icon: /* @__PURE__ */ jsx(Icon.ArrowSquarePathUpDown, {}),
+-			label: "Change type"
++			label: "Alterar tipo"
+ 		}), /* @__PURE__ */ jsx(DropdownMenuContent, {
+ 			sideOffset: -4,
+ 			className: "w-50",
+@@ -1520,12 +1520,12 @@ function PropMenu({ propId, view }) {
+ 		view === "table" && /* @__PURE__ */ jsxs(Fragment, { children: [/* @__PURE__ */ jsx(Separator, {}), /* @__PURE__ */ jsxs(DropdownMenuGroup, { children: [
+ 			/* @__PURE__ */ jsx(DropdownMenuItem, {
+ 				icon: /* @__PURE__ */ jsx(Icon.FilterSmall, {}),
+-				label: "Filter",
++				label: "Filtrar",
+ 				onClick: addFilter
+ 			}),
+ 			/* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, {
+ 				icon: /* @__PURE__ */ jsx(Icon.ArrowUpDown, {}),
+-				label: "Sort"
++				label: "Ordenar"
+ 			}), /* @__PURE__ */ jsx(DropdownMenuContent, {
+ 				sideOffset: -4,
+ 				className: "w-50",
+@@ -1543,13 +1543,13 @@ function PropMenu({ propId, view }) {
+ 				selector: (state) => state.grouping,
+ 				children: (grouping) => /* @__PURE__ */ jsx(DropdownMenuItem, {
+ 					icon: /* @__PURE__ */ jsx(Icon.SquareGridBelowLines, {}),
+-					label: grouping.includes(propId) ? "Ungroup" : "Group",
++					label: grouping.includes(propId) ? "Desagrupar" : "Agrupar",
+ 					onClick: () => table.setGroupingColumn((v) => v === propId ? null : propId)
+ 				})
+ 			}),
+ 			/* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, {
+ 				icon: /* @__PURE__ */ jsx(Icon.Sum, {}),
+-				label: "Calculate"
++				label: "Calcular"
+ 			}), /* @__PURE__ */ jsx(DropdownMenuContent, {
+ 				sideOffset: -4,
+ 				className: "w-50",
+@@ -1561,10 +1561,10 @@ function PropMenu({ propId, view }) {
+ 				onClick: pinColumns,
+ 				...canUnfreeze ? {
+ 					icon: /* @__PURE__ */ jsx(Icon.PinStrikeThrough, {}),
+-					label: "Unfreeze columns"
++					label: "Descongelar colunas"
+ 				} : {
+ 					icon: /* @__PURE__ */ jsx(Icon.Pin, {}),
+-					label: "Freeze up to column"
++					label: "Congelar até a coluna"
+ 				},
+ 				className: "[&_svg]:w-3"
+ 			}),
+@@ -1577,10 +1577,10 @@ function PropMenu({ propId, view }) {
+ 				onClick: wrapProp,
+ 				...info.wrapped ? {
+ 					icon: /* @__PURE__ */ jsx(Icon.ArrowLineRight, {}),
+-					label: "Unwrap text"
++					label: "Não quebrar texto"
+ 				} : {
+ 					icon: /* @__PURE__ */ jsx(Icon.ArrowUTurnDownLeft, {}),
+-					label: "Wrap text"
++					label: "Quebrar texto"
+ 				}
+ 			})
+ 		] })] }),
+@@ -1592,12 +1592,12 @@ function PropMenu({ propId, view }) {
+ 		}, side)), info.type !== "title" && /* @__PURE__ */ jsxs(Fragment, { children: [/* @__PURE__ */ jsx(DropdownMenuItem, {
+ 			onClick: duplicateProp,
+ 			icon: /* @__PURE__ */ jsx(Icon.Duplicate, {}),
+-			label: "Duplicate property"
++			label: "Duplicar propriedade"
+ 		}), /* @__PURE__ */ jsx(DropdownMenuItem, {
+ 			variant: "warning",
+ 			onClick: deleteProp,
+ 			icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
+-			label: "Delete property"
++			label: "Excluir propriedade"
+ 		})] })] })
+ 	] });
+ }
+@@ -1637,7 +1637,7 @@ function PropsMenu() {
+ 			});
+ 			return /* @__PURE__ */ jsxs(Fragment, { children: [
+ 				/* @__PURE__ */ jsx(MenuHeader, {
+-					title: "Properties",
++					title: "Propriedades",
+ 					onBack: () => table.setTableMenuState({
+ 						open: true,
+ 						page: null
+@@ -1659,7 +1659,7 @@ function PropsMenu() {
+ 					}), /* @__PURE__ */ jsxs(AutocompleteContent, {
+ 						variant: "inline",
+ 						children: [/* @__PURE__ */ jsx(AutocompleteList, { children: /* @__PURE__ */ jsxs(AutocompleteGroup, { children: [/* @__PURE__ */ jsx(MenuGroupHeader, {
+-							title: "Properties",
++							title: "Propriedades",
+ 							action: search ? null : noShownProps ? "Show all" : "Hide all",
+ 							onActionClick: table.toggleAllColumnsVisible
+ 						}), /* @__PURE__ */ jsx(Sortable.Root, {
+@@ -1674,7 +1674,7 @@ function PropsMenu() {
+ 							}, prop.id) }) })
+ 						})] }) }), /* @__PURE__ */ jsx(AutocompleteEmpty, {
+ 							className: "px-3 text-start text-muted",
+-							children: "No results"
++							children: "Sem resultados"
+ 						})]
+ 					})]
+ 				}),
+@@ -1683,7 +1683,7 @@ function PropsMenu() {
+ 					/* @__PURE__ */ jsx(DropdownMenuItem, {
+ 						variant: "secondary",
+ 						icon: /* @__PURE__ */ jsx(Icon.Plus, { className: "size-4" }),
+-						label: "New property",
++						label: "Nova propriedade",
+ 						closeOnClick: false,
+ 						onClick: () => table.setTableMenuState({
+ 							open: true,
+@@ -1693,7 +1693,7 @@ function PropsMenu() {
+ 					deletedCount > 0 && /* @__PURE__ */ jsx(DropdownMenuItem, {
+ 						variant: "secondary",
+ 						icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
+-						label: "Deleted properties",
++						label: "Propriedades excluídas",
+ 						closeOnClick: false,
+ 						onClick: () => table.setTableMenuState({
+ 							open: true,
+@@ -1705,7 +1705,7 @@ function PropsMenu() {
+ 						variant: "secondary",
+ 						onClick: () => window.open("https://www.notion.com/help/database-properties"),
+ 						icon: /* @__PURE__ */ jsx(Icon.Help, { className: "size-4" }),
+-						label: "Learn about properties"
++						label: "Sobre propriedades"
+ 					})
+ 				] })
+ 			] });
+@@ -2033,7 +2033,7 @@ function EditLogDialog({ state, onClose, onLoadMore, onRetry, finalFocus, onOpen
+ 				children: [/* @__PURE__ */ jsx(DialogTitle, {
+ 					typography: "h2",
+ 					className: "text-left",
+-					children: "Edit log"
++					children: "Histórico"
+ 				}), /* @__PURE__ */ jsx(DialogDescription, {
+ 					className: "text-left text-base",
+ 					children: state.target?.type === "row" ? state.target.title?.trim() ? state.target.title : state.target.rowId : "Table history"
+@@ -2380,7 +2380,7 @@ function RowActionMenu({ rowId, onClose, getReturnFocus }) {
+ 			value: "Page",
+ 			items: [{
+ 				value: `edit-icon`,
+-				label: "Edit icon",
++				label: "Editar ícone",
+ 				icon: /* @__PURE__ */ jsx(Icon.EmojiFace, { className: "size-5" })
+ 			}]
+ 		},
+@@ -2393,7 +2393,7 @@ function RowActionMenu({ rowId, onClose, getReturnFocus }) {
+ 				onSelect: openRowView
+ 			}, {
+ 				value: "open-in-new-tab",
+-				label: "Open in new tab",
++				label: "Abrir em nova aba",
+ 				icon: /* @__PURE__ */ jsx(Icon.ArrowDiagonalUpRight, {}),
+ 				shortcut: `${KEYBOARD.CMD}${KEYBOARD.SHIFT}${KEYBOARD.ENTER}`,
+ 				onSelect: openInNewTab
+@@ -2404,7 +2404,7 @@ function RowActionMenu({ rowId, onClose, getReturnFocus }) {
+ 			items: [
+ 				...canViewRowLogs ? [{
+ 					value: "edit-log",
+-					label: "Edit log",
++					label: "Histórico",
+ 					icon: /* @__PURE__ */ jsx(Icon.Clock, {}),
+ 					onSelect: () => {
+ 						const row = table.getRow(rowId);
+@@ -2417,20 +2417,20 @@ function RowActionMenu({ rowId, onClose, getReturnFocus }) {
+ 				}] : [],
+ 				{
+ 					value: "copy-link",
+-					label: "Copy link",
++					label: "Copiar link",
+ 					icon: /* @__PURE__ */ jsx(Icon.Link, {}),
+ 					onSelect: copyLink
+ 				},
+ 				{
+ 					value: "duplicate",
+-					label: "Duplicate",
++					label: "Duplicar",
+ 					icon: /* @__PURE__ */ jsx(Icon.Duplicate, {}),
+ 					shortcut: `${KEYBOARD.CMD}D`,
+ 					onSelect: duplicateRow
+ 				},
+ 				{
+ 					value: "delete",
+-					label: "Delete",
++					label: "Excluir",
+ 					icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
+ 					shortcut: KEYBOARD.DEL,
+ 					onSelect: deleteRow
+@@ -2510,7 +2510,7 @@ function SortMenu() {
+ 				closeOnClick: false,
+ 				variant: "secondary",
+ 				icon: /* @__PURE__ */ jsx(Icon.Plus, { className: "size-4" }),
+-				label: "Add sort"
++				label: "Adicionar ordenação"
+ 			})
+ 		}), /* @__PURE__ */ jsx(PopoverContent, { children: /* @__PURE__ */ jsx(PropSelectMenu, { onSelect: () => setAddingSort(false) }) })]
+ 	}), /* @__PURE__ */ jsx(DropdownMenuItem, {
+@@ -2518,7 +2518,7 @@ function SortMenu() {
+ 		variant: "warning",
+ 		className: "text-secondary",
+ 		icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
+-		label: "Delete sort",
++		label: "Excluir ordenação",
+ 		onClick: () => table.resetSorting()
+ 	})] })] });
+ }
+@@ -2639,7 +2639,7 @@ function PropSelectMenu({ onSelect }) {
+ 						}, column.id) })
+ 					}) }), /* @__PURE__ */ jsx(AutocompleteEmpty, {
+ 						className: "px-3 text-start text-muted",
+-						children: "No results"
++						children: "Sem resultados"
+ 					})]
+ 				})]
+ 			});
+@@ -2652,7 +2652,7 @@ function PropSelectMenu({ onSelect }) {
+ function DeletedPropsMenu() {
+ 	const { table } = useTableViewCtx();
+ 	return /* @__PURE__ */ jsxs(Fragment, { children: [/* @__PURE__ */ jsx(MenuHeader, {
+-		title: "Deleted properties",
++		title: "Propriedades excluídas",
+ 		onBack: () => table.setTableMenuState({
+ 			open: true,
+ 			page: TableViewMenuPage.Props
+@@ -2703,7 +2703,7 @@ function EditGroupMenu() {
+ 	const col = table.getGroupedColumnInfo();
+ 	return /* @__PURE__ */ jsxs(Fragment, { children: [
+ 		/* @__PURE__ */ jsx(MenuHeader, {
+-			title: "Group",
++			title: "Agrupar",
+ 			onBack: () => table.setTableMenuState({
+ 				open: true,
+ 				page: null
+@@ -2772,12 +2772,12 @@ function EditGroupMenu() {
+ 			selector: (state) => state.tableGlobal.layout,
+ 			children: (layout) => layout !== "board" && /* @__PURE__ */ jsx(DropdownMenuItem, {
+ 				icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
+-				label: "Remove grouping",
++				label: "Remover agrupamento",
+ 				onClick: () => table.setGroupingColumn(null)
+ 			})
+ 		}), /* @__PURE__ */ jsx(DropdownMenuItem, {
+ 			icon: /* @__PURE__ */ jsx(Icon.QuestionMarkCircled, {}),
+-			label: "Learn about grouping",
++			label: "Sobre agrupamento",
+ 			onClick: () => {
+ 				if (!isClient) return;
+ 				window.open("https://www.notion.com/help/boards#reorder-columns-&-cards", "_blank");
+@@ -2828,7 +2828,7 @@ function GroupSortControl({ colId }) {
+ 			const value = groupSort.mode === "manual" || !method ? "manual" : groupSort.mode;
+ 			const labels = method && getSortingDirectionLabels(method);
+ 			return /* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, {
+-				label: "Sort groups",
++				label: "Ordenar grupos",
+ 				children: /* @__PURE__ */ jsx(MenuItemAction, {
+ 					className: "text-muted",
+ 					children: value === "manual" ? "Manual" : value === "ascending" ? labels?.ascending : labels?.descending
+@@ -2994,7 +2994,7 @@ function RowViewMenu({ locked }) {
+ 		selector: (state) => state.tableGlobal.rowView,
+ 		children: (current) => /* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, {
+ 			disabled: locked,
+-			label: "Open pages in",
++			label: "Abrir páginas em",
+ 			children: /* @__PURE__ */ jsx(MenuItemAction, {
+ 				className: "flex items-center text-muted",
+ 				children: ROW_VIEW_OPTIONS[current].label
+@@ -3066,7 +3066,7 @@ function SelectGroupMenu() {
+ 			const groupOptions = [...tableGlobal.layout !== "board" ? [{
+ 				kind: "none",
+ 				id: null,
+-				name: "None"
++				name: "Nenhum"
+ 			}] : [], ...options$4];
+ 			return /* @__PURE__ */ jsxs(Fragment, { children: [/* @__PURE__ */ jsx(MenuHeader, {
+ 				title: "Group by",
+@@ -3081,7 +3081,7 @@ function SelectGroupMenu() {
+ 				autoHighlight: "always",
+ 				openOnInputClick: true,
+ 				children: [/* @__PURE__ */ jsx(AutocompleteInput, {
+-					placeholder: "Search for a property",
++					placeholder: "Buscar propriedade",
+ 					onKeyDown: (e) => e.stopPropagation()
+ 				}), /* @__PURE__ */ jsxs(AutocompleteContent, {
+ 					variant: "inline",
+@@ -3096,7 +3096,7 @@ function SelectGroupMenu() {
+ 						}, option.id ?? "none") })
+ 					}) }), /* @__PURE__ */ jsx(AutocompleteEmpty, {
+ 						className: "px-3 text-start text-muted",
+-						children: "No results"
++						children: "Sem resultados"
+ 					})]
+ 				})]
+ 			})] });
+@@ -3127,7 +3127,7 @@ function TableViewMenuContent(props) {
+ 		case TableViewMenuPage.Layout: return /* @__PURE__ */ jsx(LayoutMenu, {});
+ 		case TableViewMenuPage.Sort: return /* @__PURE__ */ jsxs(Fragment, { children: [/* @__PURE__ */ jsx(MenuHeader, {
+ 			id: "sort",
+-			title: "Sort",
++			title: "Ordenar",
+ 			onBack: () => table.setTableMenuState({
+ 				open: true,
+ 				page: null
+@@ -3165,7 +3165,7 @@ function TableMenu({ getReturnFocus }) {
+ 	return /* @__PURE__ */ jsxs(Fragment, { children: [
+ 		/* @__PURE__ */ jsx(MenuHeader, {
+ 			id: "view-settings",
+-			title: "View Settings"
++			title: "Configurações da visualização"
+ 		}),
+ 		/* @__PURE__ */ jsxs(DropdownMenuGroup, { children: [
+ 			/* @__PURE__ */ jsx(DropdownMenuItem, {
+@@ -3177,14 +3177,14 @@ function TableMenu({ getReturnFocus }) {
+ 			}),
+ 			/* @__PURE__ */ jsx(DropdownMenuItem, {
+ 				icon: /* @__PURE__ */ jsx(Icon.FilterSmall, {}),
+-				label: "Filter",
++				label: "Filtrar",
+ 				onClick: () => filterMenu.handle.open(FILTER_MENU_TOOLBAR_TRIGGER_ID),
+ 				children: /* @__PURE__ */ jsx(MenuItemSelect, { children: filterCount || "" })
+ 			}),
+ 			/* @__PURE__ */ jsx(DropdownMenuItem, {
+ 				closeOnClick: false,
+ 				icon: /* @__PURE__ */ jsx(Icon.ArrowUpDown, {}),
+-				label: "Sort",
++				label: "Ordenar",
+ 				onClick: () => openMenu(TableViewMenuPage.Sort),
+ 				children: /* @__PURE__ */ jsx(MenuItemSelect, { children: sortingCount || "" })
+ 			}),
+@@ -3197,7 +3197,7 @@ function TableMenu({ getReturnFocus }) {
+ 			})
+ 		] }),
+ 		/* @__PURE__ */ jsx(DropdownMenuSeparator, {}),
+-		/* @__PURE__ */ jsxs(DropdownMenuGroup, { children: [/* @__PURE__ */ jsx(DropdownMenuLabel, { title: "Data source settings" }), /* @__PURE__ */ jsx(DropdownMenuItem, {
++		/* @__PURE__ */ jsxs(DropdownMenuGroup, { children: [/* @__PURE__ */ jsx(DropdownMenuLabel, { title: "Configurações da fonte de dados" }), /* @__PURE__ */ jsx(DropdownMenuItem, {
+ 			closeOnClick: false,
+ 			icon: /* @__PURE__ */ jsx(Icon.Sliders, {}),
+ 			label: "Edit properties",
+@@ -3218,7 +3218,7 @@ function TableMenu({ getReturnFocus }) {
+ 			onClick: table.toggleTableLocked
+ 		}), canViewTableLogs && /* @__PURE__ */ jsx(DropdownMenuItem, {
+ 			icon: /* @__PURE__ */ jsx(Icon.Clock, {}),
+-			label: "Edit log",
++			label: "Histórico",
+ 			onClick: () => {
+ 				const returnFocus = getReturnFocus?.();
+ 				table.setTableMenuState({
+@@ -3265,7 +3265,7 @@ function DateFormatMenu({ showIcon, format, onChange }) {
+ 		role: "menuitem",
+ 		render: /* @__PURE__ */ jsx(MenuItem, {
+ 			icon: showIcon ? /* @__PURE__ */ jsx(Icon.ViewCalendar, {}) : void 0,
+-			label: "Date format",
++			label: "Formato de data",
+ 			children: /* @__PURE__ */ jsx(MenuItemSelect, { children: options$3.find((option) => option.value === format)?.label })
+ 		})
+ 	}), /* @__PURE__ */ jsx(DropdownMenuContent, {
+@@ -3303,7 +3303,7 @@ function TimeFormatMenu({ showIcon, format, onChange }) {
+ 		nativeButton: false,
+ 		role: "menuitem",
+ 		render: /* @__PURE__ */ jsx(MenuItem, {
+-			label: "Time format",
++			label: "Formato de hora",
+ 			icon: showIcon ? /* @__PURE__ */ jsx(Icon.Clock, {}) : void 0,
+ 			children: /* @__PURE__ */ jsx(MenuItemSelect, { children: options$2.find((option) => option.value === format)?.label })
+ 		})
+@@ -3326,7 +3326,7 @@ function TimeFormatMenu({ showIcon, format, onChange }) {
+ function DateConfigMenu({ config, onChange }) {
+ 	return /* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, {
+ 		icon: /* @__PURE__ */ jsx(Icon.Sliders, {}),
+-		label: "Edit property"
++		label: "Editar propriedade"
+ 	}), /* @__PURE__ */ jsx(DropdownMenuContent, {
+ 		sideOffset: -4,
+ 		className: "w-75",
+@@ -3367,7 +3367,7 @@ function DisplayTypeSelect({ type, onUpdate }) {
+ 					})
+ 				}), /* @__PURE__ */ jsx("div", {
+ 					className: "text-xs/none",
+-					children: "Number"
++					children: "Número"
+ 				})]
+ 			}),
+ 			/* @__PURE__ */ jsxs(Button, {
+@@ -3410,25 +3410,25 @@ function DisplayTypeSelect({ type, onUpdate }) {
+ //#region src/plugins/number/number-config-menu/format-menu.tsx
+ const options$1 = [
+ 	{
+-		label: "Number",
++		label: "Número",
+ 		value: "number"
+ 	},
+ 	{
+-		label: "Number with commas",
++		label: "Número com separadores",
+ 		value: "number_with_commas"
+ 	},
+ 	{
+-		label: "Percent",
++		label: "Porcentagem",
+ 		value: "percent"
+ 	},
+ 	{
+-		label: "Currency",
++		label: "Moeda",
+ 		value: "currency"
+ 	}
+ ];
+ function FormatMenu({ format, onUpdate }) {
+ 	return /* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, {
+-		label: "Number format",
++		label: "Formato de número",
+ 		children: /* @__PURE__ */ jsx("div", {
+ 			className: "text-muted",
+ 			children: options$1.find((option) => option.value === format)?.label
+@@ -3520,7 +3520,7 @@ function OptionSettings({ options: options$4, onUpdate }) {
+ //#region src/plugins/number/number-config-menu/rounding-menu.tsx
+ const options = [
+ 	{
+-		label: "Default",
++		label: "Padrão",
+ 		value: "default"
+ 	},
+ 	{
+@@ -3550,7 +3550,7 @@ const options = [
+ ];
+ function RoundingMenu({ round, onUpdate }) {
+ 	return /* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, {
+-		label: "Decimal places",
++		label: "Casas decimais",
+ 		children: /* @__PURE__ */ jsx("div", {
+ 			className: "text-muted",
+ 			children: options.find((option) => option.value === round)?.label
+@@ -3574,7 +3574,7 @@ function RoundingMenu({ round, onUpdate }) {
+ function NumberConfigMenu({ config, onChange }) {
+ 	return /* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, {
+ 		icon: /* @__PURE__ */ jsx(Icon.Sliders, {}),
+-		label: "Edit property"
++		label: "Editar propriedade"
+ 	}), /* @__PURE__ */ jsxs(DropdownMenuContent, {
+ 		sideOffset: -4,
+ 		className: "w-75",
+@@ -3594,7 +3594,7 @@ function NumberConfigMenu({ config, onChange }) {
+ 			})] }),
+ 			/* @__PURE__ */ jsx(DropdownMenuSeparator, {}),
+ 			/* @__PURE__ */ jsxs(DropdownMenuGroup, { children: [
+-				/* @__PURE__ */ jsx(DropdownMenuLabel, { title: "Show as" }),
++				/* @__PURE__ */ jsx(DropdownMenuLabel, { title: "Mostrar como" }),
+ 				/* @__PURE__ */ jsx(DisplayTypeSelect, {
+ 					type: config.showAs,
+ 					onUpdate: (showAs) => onChange((v) => ({
+@@ -3649,14 +3649,14 @@ function OptionMeta({ option, validateName, onUpdate }) {
+ 				...nameField.props,
+ 				endIcon: /* @__PURE__ */ jsx(TooltipPreset, {
+ 					side: "top",
+-					description: "Add property description",
++					description: "Adicionar descrição",
+ 					className: "z-999",
+ 					children: /* @__PURE__ */ jsx(Button, {
+ 						tabIndex: 0,
+ 						variant: "close",
+ 						className: "ml-1 grow-0",
+ 						onClick: toggleDesc,
+-						"aria-label": "Add property description",
++						"aria-label": "Adicionar descrição",
+ 						children: /* @__PURE__ */ jsx(Icon.InfoFilled, { className: "fill-default/45 hover:fill-icon" })
+ 					})
+ 				})
+@@ -3692,13 +3692,13 @@ function SelectOptionMenu({ option, validateName, onDelete, onUpdate }) {
+ 				variant: "warning",
+ 				onClick: onDelete,
+ 				icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
+-				label: "Delete"
++				label: "Excluir"
+ 			})] }),
+ 			/* @__PURE__ */ jsx(DropdownMenuSeparator, {}),
+ 			/* @__PURE__ */ jsxs(DropdownMenuRadioGroup, {
+ 				value: option.color,
+ 				onValueChange: (color) => onUpdate({ color }),
+-				children: [/* @__PURE__ */ jsx(DropdownMenuLabel, { title: "Colors" }), Object.entries(COLOR).map(([key, color]) => /* @__PURE__ */ jsx(DropdownMenuRadioItem, {
++				children: [/* @__PURE__ */ jsx(DropdownMenuLabel, { title: "Cores" }), Object.entries(COLOR).map(([key, color]) => /* @__PURE__ */ jsx(DropdownMenuRadioItem, {
+ 					value: key,
+ 					icon: /* @__PURE__ */ jsx(ColorIcon, { color: color.rgba }),
+ 					label: color.name
+@@ -3985,18 +3985,18 @@ const sortOptions = [
+ 		value: "manual"
+ 	},
+ 	{
+-		label: "Alphabetical",
++		label: "Alfabética",
+ 		value: "alphabetical"
+ 	},
+ 	{
+-		label: "Reverse alphabetical",
++		label: "Alfabética inversa",
+ 		value: "reverse-alphabetical"
+ 	}
+ ];
+ function SelectConfigMenu({ multi, config, ...props }) {
+ 	return /* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, {
+ 		icon: /* @__PURE__ */ jsx(Icon.Sliders, {}),
+-		label: "Edit property"
++		label: "Editar propriedade"
+ 	}), /* @__PURE__ */ jsx(DropdownMenuContent, {
+ 		sideOffset: -4,
+ 		className: "w-[250px]",
+@@ -4034,8 +4034,8 @@ function SelectConfigMenuContent({ multi, config, ...props }) {
+ 	}, [nameField.ref, showInput]);
+ 	return /* @__PURE__ */ jsxs(Fragment, { children: [/* @__PURE__ */ jsx(DropdownMenuGroup, { children: /* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, {
+ 		icon: /* @__PURE__ */ jsx(Icon.ArrowUpDown, {}),
+-		label: "Sort",
+-		"aria-label": "Sort options",
++		label: "Ordenar",
++		"aria-label": "Opções de ordenação",
+ 		children: /* @__PURE__ */ jsx(MenuItemAction, {
+ 			className: "flex items-center text-muted",
+ 			children: sortOptions.find((o) => o.value === config.sort)?.label
+@@ -4056,13 +4056,13 @@ function SelectConfigMenuContent({ multi, config, ...props }) {
+ 		})
+ 	})] }) }), /* @__PURE__ */ jsxs(DropdownMenuGroup, { children: [
+ 		/* @__PURE__ */ jsx(DropdownMenuLabel, {
+-			title: "Options",
++			title: "Opções",
+ 			className: "relative",
+ 			children: /* @__PURE__ */ jsx(Button, {
+ 				variant: "hint",
+ 				className: "absolute top-0 right-2 size-5",
+ 				onClick: toggleInput,
+-				"aria-label": showInput ? "Close" : "Add",
++				"aria-label": showInput ? "Fechar" : "Adicionar",
+ 				children: !showInput ? /* @__PURE__ */ jsx(Icon.Plus, { className: "size-3.5" }) : /* @__PURE__ */ jsx(Icon.Close, { className: "size-3.5" })
+ 			})
+ 		}),
+@@ -4200,7 +4200,7 @@ function BoardCard({ groupId, row }) {
+ 						className: "min-h-6 w-auto max-w-full grow text-sm/normal font-medium wrap-break-word whitespace-pre-wrap",
+ 						children: titleCell.cell.value || /* @__PURE__ */ jsx("span", {
+ 							className: "text-muted",
+-							children: "New page"
++							children: "Nova página"
+ 						})
+ 					})]
+ 				}),
+@@ -4259,7 +4259,7 @@ function BoardGroup({ index, row }) {
+ 					size: "sm",
+ 					className: "w-full rounded-lg leading-tight text-secondary",
+ 					onClick: addRow,
+-					children: [/* @__PURE__ */ jsx(Icon.Plus, { className: "fill-current" }), "New page"]
++					children: [/* @__PURE__ */ jsx(Icon.Plus, { className: "fill-current" }), "Nova página"]
+ 				})
+ 			]
+ 		})
+@@ -4550,7 +4550,7 @@ function CalendarViewReady({ property: property$1, resources }) {
+ 	const titleId = resources.columnOrder.find((id) => resources.columnsInfo[id]?.type === "title");
+ 	const events = rows.flatMap((row) => {
+ 		const title$2 = titleId ? String(row.original.properties[titleId]?.value ?? "") : "";
+-		const event = toCalendarEvent(row.original, property$1.id, title$2 || "New page", timeZone);
++		const event = toCalendarEvent(row.original, property$1.id, title$2 || "Nova página", timeZone);
+ 		return event ? [event] : [];
+ 	});
+ 	return /* @__PURE__ */ jsx(Table.Content, {
+@@ -4826,7 +4826,7 @@ function DndTableBodyContent({ locked, sorting, isResizingColumn, pendingDragEnd
+ 			onClick: () => table.addRow(),
+ 			children: /* @__PURE__ */ jsxs("span", {
+ 				className: "sticky inset-s-(--table-view-row-action-gutter) inline-flex items-center text-sm text-muted opacity-100 transition-opacity duration-200",
+-				children: [/* @__PURE__ */ jsx(Icon.Plus, { className: "mr-[7px] ml-px size-3.5 fill-default/35" }), "New page"]
++				children: [/* @__PURE__ */ jsx(Icon.Plus, { className: "mr-[7px] ml-px size-3.5 fill-default/35" }), "Nova página"]
+ 			})
+ 		}),
+ 		/* @__PURE__ */ jsx(Dialog, {
+@@ -4961,7 +4961,7 @@ function ListViewContentInner({ sorting, pendingDragEndEvent, setPendingDragEndE
+ 					variant: "cell",
+ 					className: "h-7.5 w-full rounded-md px-2 text-muted",
+ 					onClick: () => table.addRow(),
+-					children: [/* @__PURE__ */ jsx(Icon.Plus, { className: "size-3.5 fill-current" }), "New page"]
++					children: [/* @__PURE__ */ jsx(Icon.Plus, { className: "size-3.5 fill-current" }), "Nova página"]
+ 				})]
+ 			})
+ 		}), /* @__PURE__ */ jsx(Dialog, {
+@@ -5034,7 +5034,7 @@ function ViewNav({ rowId }) {
+ 					children: /* @__PURE__ */ jsx(Button, {
+ 						variant: "hint",
+ 						className: "size-6",
+-						"aria-label": "Open in full page",
++						"aria-label": "Abrir em página inteira",
+ 						onClick: () => table.openRowInFullPage(rowId),
+ 						children: /* @__PURE__ */ jsx(Icon.ArrowExpandDiagonalSmall, { className: "size-5 fill-icon" })
+ 					})
+@@ -5045,7 +5045,7 @@ function ViewNav({ rowId }) {
+ 				}),
+ 				/* @__PURE__ */ jsxs(DropdownMenu, { children: [/* @__PURE__ */ jsx(TooltipPreset, {
+ 					className: "z-999",
+-					description: "Switch peek mode",
++					description: "Trocar modo de visualização",
+ 					children: /* @__PURE__ */ jsx(DropdownMenuTrigger, { render: /* @__PURE__ */ jsx(Button, {
+ 						variant: "hint",
+ 						className: "size-6",
+@@ -5208,7 +5208,7 @@ function DialogView({ children }) {
+ 							/* @__PURE__ */ jsx(DialogTitle, {
+ 								typography: "h1",
+ 								className: "col-start-2 mb-2 text-left",
+-								children: title$2 || "New page"
++								children: title$2 || "Nova página"
+ 							}),
+ 							/* @__PURE__ */ jsx("div", {
+ 								className: "col-start-2 mb-3 min-w-0",
+@@ -5251,7 +5251,7 @@ function FullView({ children }) {
+ 					children: [
+ 						/* @__PURE__ */ jsx("div", {
+ 							className: cn(typography("h1"), "col-start-2 mb-2 text-left"),
+-							children: titleCell.cell.value || "New page"
++							children: titleCell.cell.value || "Nova página"
+ 						}),
+ 						/* @__PURE__ */ jsx("div", {
+ 							className: "col-start-2 mb-3 min-w-0",
+@@ -5291,7 +5291,7 @@ function SideView({ children }) {
+ 							/* @__PURE__ */ jsx(SheetTitle, {
+ 								typography: "h1",
+ 								className: "col-start-2 mb-2",
+-								children: title$2 || "New page"
++								children: title$2 || "Nova página"
+ 							}),
+ 							/* @__PURE__ */ jsx("div", {
+ 								className: "col-start-2 mb-3 min-w-0",
+@@ -5719,7 +5719,7 @@ function TimelineSidebarRows({ sortable }) {
+ 		const { colId: titleColumnId, cell: titleDataCell } = row.getTitleCell();
+ 		const titleCell = row.getAllCells().find((candidate) => candidate.column.id === titleColumnId);
+ 		if (!titleCell) return null;
+-		const title$2 = String(titleDataCell.value || "New page");
++		const title$2 = String(titleDataCell.value || "Nova página");
+ 		const wrapped = titleCell.getInfo().wrapped;
+ 		const index = nextIndexByGroup.get(row.parentId) ?? 0;
+ 		nextIndexByGroup.set(row.parentId, index + 1);
+@@ -5776,7 +5776,7 @@ function TimelineTrackRow({ row, propertyId }) {
+ 		style: { height: 44 }
+ 	});
+ 	const { cell } = row.getTitleCell();
+-	const title$2 = String(cell.value || "New page");
++	const title$2 = String(cell.value || "Nova página");
+ 	const feature = toTimelineFeature(row.original, propertyId, title$2);
+ 	return /* @__PURE__ */ jsx(table.Subscribe, {
+ 		selector: (state) => ({
+@@ -6098,14 +6098,14 @@ function ToolbarContent({ className }) {
+ 		className: cn("flex items-center justify-end gap-0.5", className),
+ 		children: [
+ 			/* @__PURE__ */ jsx(TooltipPreset, {
+-				description: "Filter",
++				description: "Buscar filtro",
+ 				side: "top",
+ 				children: /* @__PURE__ */ jsx(PopoverTrigger, {
+ 					id: FILTER_MENU_TOOLBAR_TRIGGER_ID,
+ 					handle: filterMenu.handle,
+ 					render: /* @__PURE__ */ jsx(Button, {
+ 						variant: "nav-icon",
+-						"aria-label": "Filter",
++						"aria-label": "Filtrar",
+ 						className: "[&_svg]:fill-current",
+ 						children: /* @__PURE__ */ jsx(Icon.FilterSmall, {})
+ 					})
+@@ -6116,19 +6116,19 @@ function ToolbarContent({ className }) {
+ 				handle: sortMenu.handle,
+ 				render: /* @__PURE__ */ jsx(Button, {
+ 					variant: "nav-icon",
+-					"aria-label": "Sort",
++					"aria-label": "Ordenar",
+ 					className: "[&_svg]:fill-current",
+ 					children: /* @__PURE__ */ jsx(Icon.ArrowUpDownSmall, {})
+ 				})
+ 			}),
+ 			/* @__PURE__ */ jsx(ToolbarItem, {
+ 				icon: /* @__PURE__ */ jsx(Icon.LightningSmall, {}),
+-				label: "Create and view automations"
++				label: "Criar e ver automações"
+ 			}),
+ 			/* @__PURE__ */ jsx(ToolbarSearch, {}),
+ 			/* @__PURE__ */ jsx(ToolbarItem, {
+ 				icon: /* @__PURE__ */ jsx(Icon.ArrowExpandDiagonalSmall, { className: "rotate-90" }),
+-				label: "Open as full page"
++				label: "Abrir como página"
+ 			}),
+ 			/* @__PURE__ */ jsxs(DropdownMenu, {
+ 				open: tableMenu.open,
+@@ -6138,7 +6138,7 @@ function ToolbarContent({ className }) {
+ 				}),
+ 				children: [/* @__PURE__ */ jsx(DropdownMenuTrigger, { render: /* @__PURE__ */ jsx(Button, {
+ 					variant: "nav-icon",
+-					"aria-label": "Settings",
++					"aria-label": "Configurações",
+ 					ref: settingsRef,
+ 					className: "[&_svg]:fill-current",
+ 					children: /* @__PURE__ */ jsx(Icon.SlidersSmall, {})
+@@ -6152,7 +6152,7 @@ function ToolbarContent({ className }) {
+ 				variant: "blue",
+ 				size: "sm",
+ 				className: "h-7 px-2",
+-				children: ["New", /* @__PURE__ */ jsx(Icon.Chevron, {
++				children: ["Novo", /* @__PURE__ */ jsx(Icon.Chevron, {
+ 					side: "down",
+ 					className: "size-3 fill-current"
+ 				})]
+@@ -6168,11 +6168,11 @@ function ToolbarSearch() {
+ 	return /* @__PURE__ */ jsxs("div", {
+ 		className: "flex items-center",
+ 		children: [/* @__PURE__ */ jsx(TooltipPreset, {
+-			description: "Search",
++			description: "Buscar",
+ 			side: "top",
+ 			children: /* @__PURE__ */ jsx(Button, {
+ 				variant: "nav-icon",
+-				"aria-label": "Search",
++				"aria-label": "Buscar",
+ 				"aria-controls": searchInputId,
+ 				"aria-expanded": searchOpen,
+ 				className: "[&_svg]:fill-current",
+@@ -6193,7 +6193,7 @@ function ToolbarSearch() {
+ 				"aria-label": "Search table",
+ 				"aria-hidden": !searchOpen,
+ 				tabIndex: searchOpen ? void 0 : -1,
+-				placeholder: "Search",
++				placeholder: "Buscar",
+ 				value: globalFilter,
+ 				onChange: (e) => table.setGlobalFilter(e.target.value),
+ 				onCancel: table.resetGlobalFilter
+@@ -6302,7 +6302,7 @@ function BulkActionMenu({ rowIds }) {
+ 	const { table } = useTableViewCtx();
+ 	const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
+ 	const rowCount = rowIds.length;
+-	const rowLabel = `${rowCount} row${rowCount === 1 ? "" : "s"}`;
++	const rowLabel = `${rowCount} linha${rowCount === 1 ? "" : "s"}`;
+ 	const duplicateRows = () => table.duplicateRows(rowIds);
+ 	const deleteRows = () => {
+ 		table.deleteRows(rowIds);
+@@ -6310,14 +6310,14 @@ function BulkActionMenu({ rowIds }) {
+ 	};
+ 	return /* @__PURE__ */ jsxs(Fragment, { children: [
+ 		/* @__PURE__ */ jsx(Button, {
+-			"aria-label": `Delete ${rowLabel}`,
++			"aria-label": `Excluir ${rowLabel}`,
+ 			variant: "hint",
+ 			className: "h-full shrink-0 rounded-none border-r px-2",
+ 			onClick: () => setShowDeleteConfirm(true),
+ 			children: /* @__PURE__ */ jsx(Icon.Trash, { className: "fill-red" })
+ 		}),
+ 		/* @__PURE__ */ jsxs(DropdownMenu, { children: [/* @__PURE__ */ jsx(DropdownMenuTrigger, { render: /* @__PURE__ */ jsx(Button, {
+-			"aria-label": "More bulk actions",
++			"aria-label": "Mais ações em massa",
+ 			variant: "hint",
+ 			className: "h-full shrink-0 rounded-none px-2",
+ 			children: /* @__PURE__ */ jsx(Icon.Dots, { className: "size-4 fill-menu-icon" })
+@@ -6326,12 +6326,12 @@ function BulkActionMenu({ rowIds }) {
+ 			className: "w-44",
+ 			children: /* @__PURE__ */ jsxs(DropdownMenuGroup, { children: [/* @__PURE__ */ jsx(DropdownMenuItem, {
+ 				icon: /* @__PURE__ */ jsx(Icon.Duplicate, {}),
+-				label: "Duplicate",
++				label: "Duplicar",
+ 				onClick: duplicateRows
+ 			}), /* @__PURE__ */ jsx(DropdownMenuItem, {
+ 				closeOnClick: false,
+ 				icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
+-				label: "Delete",
++				label: "Excluir",
+ 				variant: "error",
+ 				onClick: () => setShowDeleteConfirm(true)
+ 			})] })
+@@ -6340,9 +6340,9 @@ function BulkActionMenu({ rowIds }) {
+ 			open: showDeleteConfirm,
+ 			onOpenChange: setShowDeleteConfirm,
+ 			children: /* @__PURE__ */ jsx(AlertModal, {
+-				title: `Delete ${rowLabel}?`,
+-				primary: "Delete",
+-				secondary: "Cancel",
++				title: `Excluir ${rowLabel}?`,
++				primary: "Excluir",
++				secondary: "Cancelar",
+ 				onTrigger: deleteRows
+ 			})
+ 		})
+@@ -6377,9 +6377,9 @@ function BulkEditBar({ disabled }) {
+ 						className: "inline-flex h-full items-center border-r px-2.5 text-sm text-blue",
+ 						children: [
+ 							rowIds.length,
+-							" row",
++							" linha",
+ 							rowIds.length === 1 ? "" : "s",
+-							" selected"
++							" selecionada"
+ 						]
+ 					}),
+ 					columns.map((column) => /* @__PURE__ */ jsx(BulkEditColumn, {
+@@ -6448,7 +6448,7 @@ function TableFooterCell({ column }) {
+ 		className: "flex",
+ 		style: { width: props.width },
+ 		children: /* @__PURE__ */ jsxs(DropdownMenu, { children: [/* @__PURE__ */ jsx(DropdownMenuTrigger, { render: /* @__PURE__ */ jsx(Button, {
+-			"aria-label": `${info.name} calculation`,
++			"aria-label": `${info.name} - cálculo`,
+ 			tabIndex: 0,
+ 			variant: "cell",
+ 			className: "h-8 w-full justify-end overflow-hidden pr-2 select-auto",
+@@ -6475,7 +6475,7 @@ function CountDisplay({ id, type }) {
+ 					className: "flex items-center",
+ 					children: [/* @__PURE__ */ jsx("span", {
+ 						className: "text-muted",
+-						children: type === "checkbox" ? "∑" : "Calculate"
++						children: type === "checkbox" ? "∑" : "Calcular"
+ 					}), /* @__PURE__ */ jsx(Icon.Chevron, {
+ 						side: "down",
+ 						className: "mt-px ml-1 block size-2.5 shrink-0 fill-muted"
+@@ -7135,12 +7135,12 @@ function CopyButton({ className, value }) {
+ 			id: "quick-action-container",
+ 			className: "pointer-events-auto sticky right-1 flex bg-transparent",
+ 			children: /* @__PURE__ */ jsx(TooltipPreset, {
+-				description: "Copy to Clipboard",
++				description: "Copiar",
+ 				side: "top",
+ 				className: "z-9990",
+ 				children: /* @__PURE__ */ jsx(Button, {
+ 					tabIndex: 0,
+-					"aria-label": "Copy to Clipboard",
++					"aria-label": "Copiar",
+ 					size: "xs",
+ 					className: "rounded-md bg-main text-secondary shadow-sm",
+ 					onClick: (e) => {
+@@ -7276,7 +7276,7 @@ function GroupActionsContent({ className, row }) {
+ 							label: "Hide aggregation"
+ 						} : {
+ 							icon: /* @__PURE__ */ jsx(Icon.Eye, {}),
+-							label: "Show aggregation"
++							label: "Mostrar agregação"
+ 						},
+ 						onClick: () => row.toggleGroupAggregates()
+ 					}),
+@@ -7287,7 +7287,7 @@ function GroupActionsContent({ className, row }) {
+ 					}),
+ 					/* @__PURE__ */ jsx(DropdownMenuItem, {
+ 						icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
+-						label: "Delete rows",
++						label: "Excluir linhas",
+ 						closeOnClick: false,
+ 						onClick: () => setShowDeleteConfirm(true)
+ 					})
+@@ -7298,8 +7298,8 @@ function GroupActionsContent({ className, row }) {
+ 				onOpenChange: setShowDeleteConfirm,
+ 				children: /* @__PURE__ */ jsx(AlertModal, {
+ 					title: "Are you sure? All rows inside this group will be deleted.",
+-					primary: "Delete",
+-					secondary: "Cancel",
++					primary: "Excluir",
++					secondary: "Cancelar",
+ 					onTrigger: deleteRows
+ 				})
+ 			}),
+@@ -7307,7 +7307,7 @@ function GroupActionsContent({ className, row }) {
+ 				description: "Create new",
+ 				side: "top",
+ 				children: /* @__PURE__ */ jsx(Button, {
+-					"aria-label": "Add row",
++					"aria-label": "Adicionar linha",
+ 					variant: "hint",
+ 					className: "size-6",
+ 					onPointerDown: (e) => e.stopPropagation(),
+@@ -7488,13 +7488,13 @@ function PropMeta({ propId, type }) {
+ 						...nameField.props,
+ 						endIcon: /* @__PURE__ */ jsx(TooltipPreset, {
+ 							side: "top",
+-							description: "Add property description",
++							description: "Adicionar descrição",
+ 							className: "z-999",
+ 							children: /* @__PURE__ */ jsx(Button, {
+ 								tabIndex: 0,
+ 								variant: "close",
+ 								className: "ml-1 grow-0",
+-								"aria-label": "Add property description",
++								"aria-label": "Adicionar descrição",
+ 								onClick: toggleDesc,
+ 								children: /* @__PURE__ */ jsx(Icon.InfoFilled, { className: "fill-default/45 hover:fill-icon" })
+ 							})
+@@ -7622,7 +7622,7 @@ function RowActionGroup({ className, row }) {
+ 				className: "text-center",
+ 				children: /* @__PURE__ */ jsx(Button, {
+ 					variant: "hint",
+-					"aria-label": "Add row",
++					"aria-label": "Adicionar linha",
+ 					className: "size-6",
+ 					onClick: addNextRow,
+ 					children: /* @__PURE__ */ jsx(Icon.Plus, { className: "size-3.5 fill-icon" })
+@@ -7637,7 +7637,7 @@ function RowActionGroup({ className, row }) {
+ 					children: /* @__PURE__ */ jsx(PopoverTrigger, {
+ 						ref: triggerRef,
+ 						render: /* @__PURE__ */ jsx(Sortable.Handle, {
+-							"aria-label": "Row actions",
++							"aria-label": "Ações da linha",
+ 							className: "h-6 w-4.5"
+ 						})
+ 					})
+@@ -8165,7 +8165,7 @@ function DateTimePicker({ data, config, onChange, onConfigChange }) {
+ 			/* @__PURE__ */ jsx(Separator, {}),
+ 			/* @__PURE__ */ jsxs(MenuGroup, { children: [
+ 				/* @__PURE__ */ jsx(MenuItemSwitch, {
+-					label: "End date",
++					label: "Data de término",
+ 					checked: data.endDate,
+ 					onCheckedChange: (endDate) => onChange((v) => ({
+ 						...v,
+@@ -8181,7 +8181,7 @@ function DateTimePicker({ data, config, onChange, onConfigChange }) {
+ 					}))
+ 				}),
+ 				/* @__PURE__ */ jsx(MenuItemSwitch, {
+-					label: "Include time",
++					label: "Incluir hora",
+ 					checked: data.includeTime,
+ 					onCheckedChange: (includeTime) => onChange((v) => ({
+ 						...v,
+@@ -8201,14 +8201,14 @@ function DateTimePicker({ data, config, onChange, onConfigChange }) {
+ 						tz
+ 					})),
+ 					renderTrigger: ({ gmt }) => /* @__PURE__ */ jsx(MenuItem, {
+-						label: "Timezone",
++						label: "Fuso horário",
+ 						children: /* @__PURE__ */ jsx(MenuItemSelect, { children: gmt })
+ 					})
+ 				})] })
+ 			] }),
+ 			/* @__PURE__ */ jsx(Separator, {}),
+ 			/* @__PURE__ */ jsx(MenuGroup, { children: /* @__PURE__ */ jsx(MenuItem, {
+-				label: "Clear",
++				label: "Limpar",
+ 				onClick: () => onChange((v) => ({
+ 					...v,
+ 					start: void 0,
+@@ -8809,7 +8809,7 @@ function number$1() {
+ 	return {
+ 		id: "number",
+ 		meta: {
+-			name: "Number",
++			name: "Número",
+ 			desc: "Accepts numbers. These can also be formatted as currency or progress bars. Useful for tracking counts, prices and completion.",
+ 			icon: /* @__PURE__ */ jsx(DefaultIcon, {
+ 				type: "number",
+@@ -8817,7 +8817,7 @@ function number$1() {
+ 			})
+ 		},
+ 		default: {
+-			name: "Number",
++			name: "Número",
+ 			icon: /* @__PURE__ */ jsx(DefaultIcon, { type: "number" })
+ 		},
+ 		renderCell: createCellRenderer(renderCell),
+@@ -8912,12 +8912,12 @@ function OptionItem({ index, option, draggable, onSelect, onUpdate, onDelete, va
+ function SelectMenu({ menu, onClose }) {
+ 	const { config, optionSuggestion, tags, search, setSearch, handleTagsChange, selectTag, addOption, reorderOptions, validateOptionName, updateOption, deleteOption } = menu;
+ 	const items = [{
+-		label: "Select an option or create one",
++		label: "Selecione ou crie uma opção",
+ 		items: config.options.names,
+ 		creatable: false
+ 	}];
+ 	if (optionSuggestion) items.push({
+-		label: "Create option",
++		label: "Criar opção",
+ 		items: [optionSuggestion.name],
+ 		creatable: true
+ 	});
+@@ -9256,7 +9256,7 @@ function select$1() {
+ 	return {
+ 		id: "select",
+ 		meta: {
+-			name: "Select",
++			name: "Seleção",
+ 			desc: "Use a select property to choose one option from a predefined list. Great for categorization.",
+ 			icon: /* @__PURE__ */ jsx(DefaultIcon, {
+ 				type: "select",
+@@ -9264,7 +9264,7 @@ function select$1() {
+ 			})
+ 		},
+ 		default: {
+-			name: "Select",
++			name: "Seleção",
+ 			icon: /* @__PURE__ */ jsx(DefaultIcon, { type: "select" })
+ 		},
+ 		renderCell: createCellRenderer(renderCell),
+@@ -9489,7 +9489,7 @@ function TitleTableSlot({ value, props, row, icon: icon$1 }) {
+ 					icon: icon$1,
+ 					className: "contents"
+ 				}), /* @__PURE__ */ jsx("span", {
+-					className: cn("mr-[5px] ml-1 inline leading-normal font-medium underline decoration-muted underline-offset-2", wrappedClassName(wrapped)),
++					title: value || void 0, className: cn("mr-[5px] ml-1 inline leading-normal font-medium underline decoration-muted underline-offset-2", wrappedClassName(wrapped)),
+ 					children: value
+ 				})]
+ 			})]
+@@ -9559,7 +9559,7 @@ function TitleCompactSlot({ value, props: cellProps, icon: icon$1 }) {
+ 				className: "mr-[5px] ml-1 inline leading-normal font-medium",
+ 				children: data ? value : /* @__PURE__ */ jsx("span", {
+ 					className: "text-muted",
+-					children: "New page"
++					children: "Nova página"
+ 				})
+ 			})]
+ 		})]
+@@ -9574,7 +9574,7 @@ function TitleConfig({ config, onChange }) {
+ 		htmlFor: id,
+ 		children: /* @__PURE__ */ jsx(DropdownMenuItem, {
+ 			icon: /* @__PURE__ */ jsx(Icon.EmojiFace, {}),
+-			label: "Show page icon",
++			label: "Mostrar ícone da página",
+ 			children: /* @__PURE__ */ jsx(MenuItemAction, {
+ 				className: "flex items-center",
+ 				children: /* @__PURE__ */ jsx(Switch, {
+@@ -9607,7 +9607,7 @@ function title$1() {
+ 		});
+ 		switch (props.surface) {
+ 			case "table": return /* @__PURE__ */ jsx(CellTriggerScope, {
+-				ariaLabel: props.data.trim() || "New page",
++				ariaLabel: props.data.trim() || "Nova página",
+ 				className: triggerClassName,
+ 				children: /* @__PURE__ */ jsx(TitleTableSlot, {
+ 					value: props.data,
+@@ -9634,8 +9634,8 @@ function title$1() {
+ 				icon: icon$1,
+ 				className: "contents"
+ 			}), /* @__PURE__ */ jsx("span", {
+-				className: props.wrapped ? wrappedClassName(true) : "truncate",
+-				children: props.data || "New page"
++				title: props.data || void 0, className: props.wrapped ? wrappedClassName(true) : "truncate",
++				children: props.data || "Nova página"
+ 			})] });
+ 			default: return null;
+ 		}

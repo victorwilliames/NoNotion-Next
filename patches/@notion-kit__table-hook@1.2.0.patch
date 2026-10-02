@@ -1,0 +1,33 @@
+diff --git a/dist/index.mjs b/dist/index.mjs
+index dd3505bf039b5a0c33273bc3f8ed1e7182e5c519..a64b1ce4a8c47a464c938cc7ebd512546e544ba8 100644
+--- a/dist/index.mjs
++++ b/dist/index.mjs
+@@ -2493,19 +2493,19 @@ function createPluginMethodState() {
+ //#region src/features/constants.ts
+ const ROW_VIEW_OPTIONS = {
+ 	side: {
+-		label: "Side peek",
+-		tooltip: "Open in side peek",
+-		desc: "Open pages on the side. Keeps the view behind interactive."
++		label: "Lateral",
++		tooltip: "Abrir em painel lateral",
++		desc: "Abre as páginas na lateral, mantendo a visualização interativa."
+ 	},
+ 	center: {
+-		label: "Center peek",
+-		tooltip: "Open in center peek",
+-		desc: "Open pages in a focused, centered modal."
++		label: "Central",
++		tooltip: "Abrir em painel central",
++		desc: "Abre as páginas em um modal centralizado."
+ 	},
+ 	full: {
+-		label: "Full Page",
+-		tooltip: "Open in full page",
+-		desc: "Open pages in full page."
++		label: "Página inteira",
++		tooltip: "Abrir em página inteira",
++		desc: "Abre as páginas em página inteira."
+ 	}
+ };
+ 
