@@ -3,10 +3,6 @@
 import { ViewBoardIcon, ViewTableIcon } from "./icons";
 import type { SVGProps } from "react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
-import type { useTableViewCtx } from "@notion-kit/table-view";
-
-type Table = ReturnType<typeof useTableViewCtx>["table"];
 
 export type DatabaseViewId = "table" | "board";
 
@@ -25,29 +21,16 @@ type Props = {
   title: string;
   view: DatabaseViewId;
   onViewChange: (view: DatabaseViewId) => void;
-  tableRef: React.RefObject<Table | null>;
 };
 
 /**
  * Cabeçalho da database no estilo do Notion: título + abas de view
- * (ícone + nome, sem pills — igual ao Notion) + botão Novo.
+ * (ícone + nome, sem pills — igual ao Notion).
  */
-export function DatabaseHeader({ title, view, onViewChange, tableRef }: Props) {
-  const handleNew = () => {
-    const table = tableRef.current;
-    if (!table) return;
-    const id = table.addRow();
-    table.openRow(id);
-  };
-
+export function DatabaseHeader({ title, view, onViewChange }: Props) {
   return (
     <div>
-      <div className="flex items-center justify-between gap-4">
-        <h1 className="text-2xl font-bold leading-[1.25] tracking-tight md:text-[32px]">{title}</h1>
-        <Button onClick={handleNew} size="sm">
-          Novo
-        </Button>
-      </div>
+      <h1 className="text-[32px] font-bold leading-[1.25] tracking-tight">{title}</h1>
       <div role="tablist" aria-label="Views" className="mt-4 flex items-center gap-1">
         {VIEWS.map(({ id, label, Icon }) => {
           const active = view === id;
