@@ -34,7 +34,7 @@ function BoardGrouping() {
 export function TaskBoard({ data, onDataChange }: Props) {
   return (
     <TableView
-      defaultData={data}
+      data={data}
       onDataChange={(change) => onDataChange(change.next)}
       defaultProperties={TASK_COLUMNS}
       defaultView={

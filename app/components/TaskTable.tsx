@@ -13,9 +13,10 @@ type Props = {
 export function TaskTable({ data, onDataChange }: Props) {
   return (
     <TableView
-      defaultData={data}
+      data={data}
       onDataChange={(change) => onDataChange(change.next)}
       defaultProperties={TASK_COLUMNS}
+      defaultColumn={{ size: 280 }}
       defaultView={{ layout: "table" }}
     />
   );

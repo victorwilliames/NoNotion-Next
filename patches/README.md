@@ -9,8 +9,9 @@ diff aplicado sobre a versão exata do pacote no `pnpm install`.
 | Patch | Pacote | O quê |
 |---|---|---|
 | `@dnd-kit__dom@0.5.0.patch` | `@dnd-kit/dom` 0.5.0 | Desativa o movimento direto de nós do DOM no drag (crash `removeChild` com React 19). Redundante aqui porque o TableView já re-renderiza o preview via `setTableData`. |
-| `@notion-kit__table-view@1.2.0.patch` | `@notion-kit/table-view` 1.2.0 | Traduz ~160 strings de exibição pra PT-BR (botões, diálogos, menus, toolbar de seleção, presets de data). Só display — nenhuma chave lógica foi tocada. Também adiciona `title` (tooltip) no span do título da célula da tabela. |
+| `@notion-kit__table-view@1.2.0.patch` | `@notion-kit/table-view` 1.2.0 | Traduz ~160 strings de exibição pra PT-BR (botões, diálogos, menus, toolbar de seleção, presets de data). Só display — nenhuma chave lógica foi tocada. Também adiciona `title` (tooltip) no span do título da célula da tabela. **Correções funcionais/visuais (2026-10-03):** botão "Novo" da toolbar cria a linha via `table.addRow()` e abre o detalhe via `table.openRow(id)`; menu "⋯" do detalhe da linha usa `DropdownMenu` do `@notion-kit/ui` com item "Excluir" (`table.deleteRow`); gutter de ações da linha responsivo (`16px` mobile, `96px` desktop via `md:`); remove `underline` do texto do título na tabela (`TitleTableSlot`) pra ficar igual ao Notion. |
 | `@notion-kit__table-hook@1.2.0.patch` | `@notion-kit/table-hook` 1.2.0 | Traduz `ROW_VIEW_OPTIONS` ("Open in side/center/full peek" → "Abrir em painel lateral/central/página inteira"). |
+| `@notion-kit__utils@1.2.0.patch` | `@notion-kit/utils` 1.2.0 | **(2026-10-03)** Corrige `COLOR.gray.rgba` de `rgba(255,255,255,0.13)` (pensado pra fundo escuro) pra `rgba(206,205,202,0.5)` (cinza Notion em fundo claro). Sem isso o badge "Backlog" ficava invisível. |
 
 ## Regras
 

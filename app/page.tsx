@@ -9,14 +9,22 @@ import { taskRepository } from "@/lib/tasks/local-repository";
 import type { TaskRow } from "@/lib/tasks/types";
 
 export default function Page() {
-  const [initialData, setInitialData] = useState<TaskRow[] | null>(null);
+  const [rows, setRows] = useState<TaskRow[] | null>(null);
   const [view, setView] = useState<DatabaseViewId>("table");
 
   // Carrega do repositório só no cliente, depois da hidratação,
   // pra não divergir do HTML gerado no servidor.
   useEffect(() => {
-    setInitialData(taskRepository.load());
+    setRows(taskRepository.load());
   }, []);
+
+  // Modo controlado: o TableView recebe `data` (não `defaultData`), então
+  // toda mutação (drag no kanban, edição, excluir) atualiza o estado aqui
+  // e persiste — trocar de aba remonta a view com o dado atual, sem reverter.
+  const handleDataChange = (next: TaskRow[]) => {
+    setRows(next);
+    taskRepository.save(next);
+  };
 
   return (
     <main className="flex min-h-svh w-full flex-col">
@@ -28,15 +36,15 @@ export default function Page() {
         <TasksErrorBoundary>
           {view === "table" ? (
             <TaskTable
-              key={initialData ? "ready" : "loading"}
-              data={initialData ?? taskRepository.getLatest()}
-              onDataChange={(next) => taskRepository.save(next)}
+              key={rows ? "ready" : "loading"}
+              data={rows ?? taskRepository.getLatest()}
+              onDataChange={handleDataChange}
             />
           ) : (
             <TaskBoard
-              key={initialData ? "ready" : "loading"}
-              data={initialData ?? taskRepository.getLatest()}
-              onDataChange={(next) => taskRepository.save(next)}
+              key={rows ? "ready" : "loading"}
+              data={rows ?? taskRepository.getLatest()}
+              onDataChange={handleDataChange}
             />
           )}
         </TasksErrorBoundary>

@@ -1,8 +1,8 @@
 diff --git a/dist/plugins-BCCX7gik.mjs b/dist/plugins-BCCX7gik.mjs
-index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b32de17c23 100644
+index 643ff7fe16241a08f410ecc13552678d297846b6..f254b683d8ceedbf21ef9f494016bcaf314e73a0 100644
 --- a/dist/plugins-BCCX7gik.mjs
 +++ b/dist/plugins-BCCX7gik.mjs
-@@ -26,7 +26,7 @@ import { TimezoneMenu } from "@notion-kit/ui/timezone-menu";
+@@ -26,7 +26,7 @@
  //#region src/menus/constants.ts
  const countMethodHint = {
  	[CountMethod.NONE]: {
@@ -11,7 +11,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		label: "",
  		desc: "",
  		imgSrc: ""
-@@ -62,13 +62,13 @@ const countMethodHint = {
+@@ -62,13 +62,13 @@
  		imgSrc: "https://www.notion.so/images/aggregations/notEmpty.f8f86445.png"
  	},
  	[CountMethod.CHECKED]: {
@@ -27,7 +27,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		label: "unchecked",
  		desc: "Counts the number of pages with an unchecked checkbox for this property.",
  		imgSrc: "https://www.notion.so/images/aggregations/unchecked.e4120d79.png"
-@@ -108,7 +108,7 @@ function CalcMenu({ id }) {
+@@ -108,7 +108,7 @@
  	const currentMethod = counting.method;
  	const selectedMethod = plugin.counting?.flatMap((group) => group.functions).find((method) => method.id === currentMethod);
  	return /* @__PURE__ */ jsxs(DropdownMenuGroup, { children: [/* @__PURE__ */ jsx(DropdownMenuCheckboxItem, {
@@ -36,7 +36,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		checked: currentMethod === CountMethod.NONE || !selectedMethod,
  		onCheckedChange: () => table.setColumnCountMethod(id, CountMethod.NONE)
  	}), plugin.counting?.map((group) => /* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, { label: group.group }), /* @__PURE__ */ jsxs(DropdownMenuContent, {
-@@ -181,7 +181,7 @@ function EditPropMenu({ propId }) {
+@@ -181,7 +181,7 @@
  	const deleteProp = () => table.setColumnInfo(propId, { isDeleted: true });
  	return /* @__PURE__ */ jsxs(Fragment, { children: [
  		/* @__PURE__ */ jsx(MenuHeader, {
@@ -45,7 +45,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			onBack: () => table.setTableMenuState({
  				open: true,
  				page: TableViewMenuPage.Props
-@@ -198,7 +198,7 @@ function EditPropMenu({ propId }) {
+@@ -198,7 +198,7 @@
  			children: /* @__PURE__ */ jsx(DropdownMenuItem, {
  				disabled: true,
  				icon: /* @__PURE__ */ jsx(Icon.ArrowSquarePathUpDown, {}),
@@ -54,7 +54,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				children: /* @__PURE__ */ jsx(MenuItemSelect, { children: /* @__PURE__ */ jsxs("div", {
  					className: "flex items-center truncate",
  					children: [
-@@ -212,7 +212,7 @@ function EditPropMenu({ propId }) {
+@@ -212,7 +212,7 @@
  			closeOnClick: false,
  			onClick: openTypesMenu,
  			icon: /* @__PURE__ */ jsx(Icon.ArrowSquarePathUpDown, {}),
@@ -63,7 +63,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			children: /* @__PURE__ */ jsx(MenuItemSelect, { children: /* @__PURE__ */ jsxs("div", {
  				className: "flex truncate",
  				children: [
-@@ -231,7 +231,7 @@ function EditPropMenu({ propId }) {
+@@ -231,7 +231,7 @@
  				className: "flex items-center",
  				children: ["AI Autofill", /* @__PURE__ */ jsx("div", {
  					className: "ml-1.5 inline-block w-fit self-center rounded-sm bg-blue/10 px-1 py-0.5 text-[11px]/[1.3] font-medium tracking-normal whitespace-nowrap text-blue",
@@ -72,7 +72,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				})]
  			}),
  			children: /* @__PURE__ */ jsx(MenuItemSelect, { children: /* @__PURE__ */ jsx("div", {
-@@ -255,13 +255,13 @@ function EditPropMenu({ propId }) {
+@@ -255,13 +255,13 @@
  			/* @__PURE__ */ jsx(DropdownMenuItem, {
  				onClick: duplicateProp,
  				icon: /* @__PURE__ */ jsx(Icon.Duplicate, {}),
@@ -88,7 +88,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			})
  		] })] })
  	] });
-@@ -279,16 +279,16 @@ function AddFilterMenu({ root, parentId = "", depth = 1, className }) {
+@@ -279,16 +279,16 @@
  		render: /* @__PURE__ */ jsx(MenuItem, {
  			className,
  			variant: "secondary",
@@ -108,7 +108,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		desc: "A group to nest more filters",
  		onClick: () => table.setFilters(appendFilterNode(root, parentId, createFilterGroup()))
  	})] }) })] });
-@@ -809,8 +809,8 @@ function SingleOptionTrigger({ optionsByName }) {
+@@ -809,8 +809,8 @@
  		anchor: triggerRef,
  		className: "w-72 p-2",
  		children: [/* @__PURE__ */ jsx(ComboboxInput, {
@@ -119,7 +119,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			className: "h-7 w-full rounded-md border border-border px-2"
  		}), /* @__PURE__ */ jsx(OptionComboboxList, { optionsByName })]
  	})] });
-@@ -848,8 +848,8 @@ function MultipleOptionOperand({ options: options$4, optionsByName, value, onVal
+@@ -848,8 +848,8 @@
  					hideClearButton: true,
  					className: "pr-9",
  					children: /* @__PURE__ */ jsx(ComboboxValue, { children: (selected) => /* @__PURE__ */ jsxs(Fragment, { children: [selected.map((name) => /* @__PURE__ */ jsx(ComboboxChip, { children: name }, name)), /* @__PURE__ */ jsx(ComboboxChipsInput, {
@@ -130,7 +130,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					})] }) })
  				}), /* @__PURE__ */ jsx(ComboboxClear, {
  					"aria-label": "Clear selected options",
-@@ -870,7 +870,7 @@ function OptionComboboxList({ optionsByName }) {
+@@ -870,7 +870,7 @@
  }
  function optionGroups(options$4) {
  	return [{
@@ -139,7 +139,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		items: options$4.map(({ name }) => name)
  	}];
  }
-@@ -919,7 +919,7 @@ function DateOperand({ rule, root }) {
+@@ -919,7 +919,7 @@
  			children: [/* @__PURE__ */ jsx(SelectTrigger, {
  				"aria-label": "Date preset select",
  				className: "w-32 border border-border",
@@ -148,7 +148,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			}), /* @__PURE__ */ jsx(SelectContent, { children: /* @__PURE__ */ jsx(SelectGroup, { children: DATE_PRESETS.map(({ value, label }) => /* @__PURE__ */ jsx(SelectItem, {
  				value,
  				label
-@@ -934,35 +934,35 @@ function DateOperand({ rule, root }) {
+@@ -934,35 +934,35 @@
  const DATE_PRESETS = [
  	{
  		value: "today",
@@ -192,7 +192,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  	}
  ];
  function getDatePreset(value) {
-@@ -1002,7 +1002,7 @@ function CustomDateOperand({ value, timeZone, onValueChange }) {
+@@ -1002,7 +1002,7 @@
  			render: /* @__PURE__ */ jsx(Button, {
  				type: "button",
  				className: "h-7 min-w-32 flex-1 justify-start px-2 font-normal",
@@ -201,7 +201,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			})
  		}), /* @__PURE__ */ jsxs(PopoverContent, {
  			align: "start",
-@@ -1158,10 +1158,10 @@ function useFilterRuleUpdate(root, ruleId) {
+@@ -1158,10 +1158,10 @@
  //#region src/menus/filter-menu/filter-group-editor.tsx
  const LOGIC_ITEMS = [{
  	value: "and",
@@ -214,7 +214,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  }];
  function FilterGroupEditor({ group, root, depth, className, testId }) {
  	return /* @__PURE__ */ jsxs(MenuGroup, {
-@@ -1313,7 +1313,7 @@ function NodeActions({ id, root, className }) {
+@@ -1313,7 +1313,7 @@
  	}) }), /* @__PURE__ */ jsx(DropdownMenuContent, { children: /* @__PURE__ */ jsx(DropdownMenuGroup, { children: /* @__PURE__ */ jsx(DropdownMenuItem, {
  		variant: "warning",
  		icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
@@ -223,7 +223,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		onClick: () => table.setFilters(removeFilterNode(root, id))
  	}) }) })] });
  }
-@@ -1342,7 +1342,7 @@ function FilterMenu() {
+@@ -1342,7 +1342,7 @@
  					/* @__PURE__ */ jsx(Separator, {}),
  					/* @__PURE__ */ jsx(MenuGroup, { children: /* @__PURE__ */ jsx(MenuItem, {
  						icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
@@ -232,7 +232,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  						variant: "warning",
  						onClick: () => table.clearFilters()
  					}) })
-@@ -1391,7 +1391,7 @@ function TypesMenu({ propId, at, menu, back }) {
+@@ -1391,7 +1391,7 @@
  		});
  	};
  	return /* @__PURE__ */ jsxs(Fragment, { children: [menu && /* @__PURE__ */ jsx(MenuHeader, {
@@ -241,7 +241,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		onBack: back ? () => table.setTableMenuState({
  			open: true,
  			page: menu === TableViewMenuPage.ChangePropType ? TableViewMenuPage.EditProp : TableViewMenuPage.Props,
-@@ -1412,7 +1412,7 @@ function TypesMenu({ propId, at, menu, back }) {
+@@ -1412,7 +1412,7 @@
  				onKeyDown: (e) => e.stopPropagation()
  			}), /* @__PURE__ */ jsx(AutocompleteContent, {
  				variant: "inline",
@@ -250,7 +250,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					side: "left",
  					sideOffset: 6,
  					description: plugin.meta.desc,
-@@ -1425,7 +1425,7 @@ function TypesMenu({ propId, at, menu, back }) {
+@@ -1425,7 +1425,7 @@
  						onClick: () => select$2(plugin.id, plugin.default.name, plugin.default.width),
  						children: propType === plugin.id && /* @__PURE__ */ jsx(MenuItemCheck, {})
  					})
@@ -259,7 +259,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					value: `search-${search}`,
  					icon: /* @__PURE__ */ jsx(DefaultIcon, {
  						type: "text",
-@@ -1508,7 +1508,7 @@ function PropMenu({ propId, view }) {
+@@ -1508,7 +1508,7 @@
  		}),
  		/* @__PURE__ */ jsxs(DropdownMenuGroup, { children: [flexRender(uiPlugin.renderConfigMenu, { column }), info.type !== "title" && /* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, {
  			icon: /* @__PURE__ */ jsx(Icon.ArrowSquarePathUpDown, {}),
@@ -268,7 +268,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		}), /* @__PURE__ */ jsx(DropdownMenuContent, {
  			sideOffset: -4,
  			className: "w-50",
-@@ -1520,12 +1520,12 @@ function PropMenu({ propId, view }) {
+@@ -1520,12 +1520,12 @@
  		view === "table" && /* @__PURE__ */ jsxs(Fragment, { children: [/* @__PURE__ */ jsx(Separator, {}), /* @__PURE__ */ jsxs(DropdownMenuGroup, { children: [
  			/* @__PURE__ */ jsx(DropdownMenuItem, {
  				icon: /* @__PURE__ */ jsx(Icon.FilterSmall, {}),
@@ -283,7 +283,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			}), /* @__PURE__ */ jsx(DropdownMenuContent, {
  				sideOffset: -4,
  				className: "w-50",
-@@ -1543,13 +1543,13 @@ function PropMenu({ propId, view }) {
+@@ -1543,13 +1543,13 @@
  				selector: (state) => state.grouping,
  				children: (grouping) => /* @__PURE__ */ jsx(DropdownMenuItem, {
  					icon: /* @__PURE__ */ jsx(Icon.SquareGridBelowLines, {}),
@@ -299,7 +299,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			}), /* @__PURE__ */ jsx(DropdownMenuContent, {
  				sideOffset: -4,
  				className: "w-50",
-@@ -1561,10 +1561,10 @@ function PropMenu({ propId, view }) {
+@@ -1561,10 +1561,10 @@
  				onClick: pinColumns,
  				...canUnfreeze ? {
  					icon: /* @__PURE__ */ jsx(Icon.PinStrikeThrough, {}),
@@ -312,7 +312,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				},
  				className: "[&_svg]:w-3"
  			}),
-@@ -1577,10 +1577,10 @@ function PropMenu({ propId, view }) {
+@@ -1577,10 +1577,10 @@
  				onClick: wrapProp,
  				...info.wrapped ? {
  					icon: /* @__PURE__ */ jsx(Icon.ArrowLineRight, {}),
@@ -325,7 +325,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				}
  			})
  		] })] }),
-@@ -1592,12 +1592,12 @@ function PropMenu({ propId, view }) {
+@@ -1592,12 +1592,12 @@
  		}, side)), info.type !== "title" && /* @__PURE__ */ jsxs(Fragment, { children: [/* @__PURE__ */ jsx(DropdownMenuItem, {
  			onClick: duplicateProp,
  			icon: /* @__PURE__ */ jsx(Icon.Duplicate, {}),
@@ -340,7 +340,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		})] })] })
  	] });
  }
-@@ -1637,7 +1637,7 @@ function PropsMenu() {
+@@ -1637,7 +1637,7 @@
  			});
  			return /* @__PURE__ */ jsxs(Fragment, { children: [
  				/* @__PURE__ */ jsx(MenuHeader, {
@@ -349,7 +349,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					onBack: () => table.setTableMenuState({
  						open: true,
  						page: null
-@@ -1659,7 +1659,7 @@ function PropsMenu() {
+@@ -1659,7 +1659,7 @@
  					}), /* @__PURE__ */ jsxs(AutocompleteContent, {
  						variant: "inline",
  						children: [/* @__PURE__ */ jsx(AutocompleteList, { children: /* @__PURE__ */ jsxs(AutocompleteGroup, { children: [/* @__PURE__ */ jsx(MenuGroupHeader, {
@@ -358,7 +358,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  							action: search ? null : noShownProps ? "Show all" : "Hide all",
  							onActionClick: table.toggleAllColumnsVisible
  						}), /* @__PURE__ */ jsx(Sortable.Root, {
-@@ -1674,7 +1674,7 @@ function PropsMenu() {
+@@ -1674,7 +1674,7 @@
  							}, prop.id) }) })
  						})] }) }), /* @__PURE__ */ jsx(AutocompleteEmpty, {
  							className: "px-3 text-start text-muted",
@@ -367,7 +367,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  						})]
  					})]
  				}),
-@@ -1683,7 +1683,7 @@ function PropsMenu() {
+@@ -1683,7 +1683,7 @@
  					/* @__PURE__ */ jsx(DropdownMenuItem, {
  						variant: "secondary",
  						icon: /* @__PURE__ */ jsx(Icon.Plus, { className: "size-4" }),
@@ -376,7 +376,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  						closeOnClick: false,
  						onClick: () => table.setTableMenuState({
  							open: true,
-@@ -1693,7 +1693,7 @@ function PropsMenu() {
+@@ -1693,7 +1693,7 @@
  					deletedCount > 0 && /* @__PURE__ */ jsx(DropdownMenuItem, {
  						variant: "secondary",
  						icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
@@ -385,7 +385,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  						closeOnClick: false,
  						onClick: () => table.setTableMenuState({
  							open: true,
-@@ -1705,7 +1705,7 @@ function PropsMenu() {
+@@ -1705,7 +1705,7 @@
  						variant: "secondary",
  						onClick: () => window.open("https://www.notion.com/help/database-properties"),
  						icon: /* @__PURE__ */ jsx(Icon.Help, { className: "size-4" }),
@@ -394,7 +394,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					})
  				] })
  			] });
-@@ -2033,7 +2033,7 @@ function EditLogDialog({ state, onClose, onLoadMore, onRetry, finalFocus, onOpen
+@@ -2033,7 +2033,7 @@
  				children: [/* @__PURE__ */ jsx(DialogTitle, {
  					typography: "h2",
  					className: "text-left",
@@ -403,7 +403,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				}), /* @__PURE__ */ jsx(DialogDescription, {
  					className: "text-left text-base",
  					children: state.target?.type === "row" ? state.target.title?.trim() ? state.target.title : state.target.rowId : "Table history"
-@@ -2380,7 +2380,7 @@ function RowActionMenu({ rowId, onClose, getReturnFocus }) {
+@@ -2380,7 +2380,7 @@
  			value: "Page",
  			items: [{
  				value: `edit-icon`,
@@ -412,7 +412,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				icon: /* @__PURE__ */ jsx(Icon.EmojiFace, { className: "size-5" })
  			}]
  		},
-@@ -2393,7 +2393,7 @@ function RowActionMenu({ rowId, onClose, getReturnFocus }) {
+@@ -2393,7 +2393,7 @@
  				onSelect: openRowView
  			}, {
  				value: "open-in-new-tab",
@@ -421,7 +421,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				icon: /* @__PURE__ */ jsx(Icon.ArrowDiagonalUpRight, {}),
  				shortcut: `${KEYBOARD.CMD}${KEYBOARD.SHIFT}${KEYBOARD.ENTER}`,
  				onSelect: openInNewTab
-@@ -2404,7 +2404,7 @@ function RowActionMenu({ rowId, onClose, getReturnFocus }) {
+@@ -2404,7 +2404,7 @@
  			items: [
  				...canViewRowLogs ? [{
  					value: "edit-log",
@@ -430,7 +430,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					icon: /* @__PURE__ */ jsx(Icon.Clock, {}),
  					onSelect: () => {
  						const row = table.getRow(rowId);
-@@ -2417,20 +2417,20 @@ function RowActionMenu({ rowId, onClose, getReturnFocus }) {
+@@ -2417,20 +2417,20 @@
  				}] : [],
  				{
  					value: "copy-link",
@@ -454,7 +454,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
  					shortcut: KEYBOARD.DEL,
  					onSelect: deleteRow
-@@ -2510,7 +2510,7 @@ function SortMenu() {
+@@ -2510,7 +2510,7 @@
  				closeOnClick: false,
  				variant: "secondary",
  				icon: /* @__PURE__ */ jsx(Icon.Plus, { className: "size-4" }),
@@ -463,7 +463,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			})
  		}), /* @__PURE__ */ jsx(PopoverContent, { children: /* @__PURE__ */ jsx(PropSelectMenu, { onSelect: () => setAddingSort(false) }) })]
  	}), /* @__PURE__ */ jsx(DropdownMenuItem, {
-@@ -2518,7 +2518,7 @@ function SortMenu() {
+@@ -2518,7 +2518,7 @@
  		variant: "warning",
  		className: "text-secondary",
  		icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
@@ -472,7 +472,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		onClick: () => table.resetSorting()
  	})] })] });
  }
-@@ -2639,7 +2639,7 @@ function PropSelectMenu({ onSelect }) {
+@@ -2639,7 +2639,7 @@
  						}, column.id) })
  					}) }), /* @__PURE__ */ jsx(AutocompleteEmpty, {
  						className: "px-3 text-start text-muted",
@@ -481,7 +481,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					})]
  				})]
  			});
-@@ -2652,7 +2652,7 @@ function PropSelectMenu({ onSelect }) {
+@@ -2652,7 +2652,7 @@
  function DeletedPropsMenu() {
  	const { table } = useTableViewCtx();
  	return /* @__PURE__ */ jsxs(Fragment, { children: [/* @__PURE__ */ jsx(MenuHeader, {
@@ -490,7 +490,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		onBack: () => table.setTableMenuState({
  			open: true,
  			page: TableViewMenuPage.Props
-@@ -2703,7 +2703,7 @@ function EditGroupMenu() {
+@@ -2703,7 +2703,7 @@
  	const col = table.getGroupedColumnInfo();
  	return /* @__PURE__ */ jsxs(Fragment, { children: [
  		/* @__PURE__ */ jsx(MenuHeader, {
@@ -499,7 +499,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			onBack: () => table.setTableMenuState({
  				open: true,
  				page: null
-@@ -2772,12 +2772,12 @@ function EditGroupMenu() {
+@@ -2772,12 +2772,12 @@
  			selector: (state) => state.tableGlobal.layout,
  			children: (layout) => layout !== "board" && /* @__PURE__ */ jsx(DropdownMenuItem, {
  				icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
@@ -514,7 +514,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			onClick: () => {
  				if (!isClient) return;
  				window.open("https://www.notion.com/help/boards#reorder-columns-&-cards", "_blank");
-@@ -2828,7 +2828,7 @@ function GroupSortControl({ colId }) {
+@@ -2828,7 +2828,7 @@
  			const value = groupSort.mode === "manual" || !method ? "manual" : groupSort.mode;
  			const labels = method && getSortingDirectionLabels(method);
  			return /* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, {
@@ -523,7 +523,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				children: /* @__PURE__ */ jsx(MenuItemAction, {
  					className: "text-muted",
  					children: value === "manual" ? "Manual" : value === "ascending" ? labels?.ascending : labels?.descending
-@@ -2994,7 +2994,7 @@ function RowViewMenu({ locked }) {
+@@ -2994,7 +2994,7 @@
  		selector: (state) => state.tableGlobal.rowView,
  		children: (current) => /* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, {
  			disabled: locked,
@@ -532,7 +532,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			children: /* @__PURE__ */ jsx(MenuItemAction, {
  				className: "flex items-center text-muted",
  				children: ROW_VIEW_OPTIONS[current].label
-@@ -3066,7 +3066,7 @@ function SelectGroupMenu() {
+@@ -3066,7 +3066,7 @@
  			const groupOptions = [...tableGlobal.layout !== "board" ? [{
  				kind: "none",
  				id: null,
@@ -541,7 +541,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			}] : [], ...options$4];
  			return /* @__PURE__ */ jsxs(Fragment, { children: [/* @__PURE__ */ jsx(MenuHeader, {
  				title: "Group by",
-@@ -3081,7 +3081,7 @@ function SelectGroupMenu() {
+@@ -3081,7 +3081,7 @@
  				autoHighlight: "always",
  				openOnInputClick: true,
  				children: [/* @__PURE__ */ jsx(AutocompleteInput, {
@@ -550,7 +550,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					onKeyDown: (e) => e.stopPropagation()
  				}), /* @__PURE__ */ jsxs(AutocompleteContent, {
  					variant: "inline",
-@@ -3096,7 +3096,7 @@ function SelectGroupMenu() {
+@@ -3096,7 +3096,7 @@
  						}, option.id ?? "none") })
  					}) }), /* @__PURE__ */ jsx(AutocompleteEmpty, {
  						className: "px-3 text-start text-muted",
@@ -559,7 +559,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					})]
  				})]
  			})] });
-@@ -3127,7 +3127,7 @@ function TableViewMenuContent(props) {
+@@ -3127,7 +3127,7 @@
  		case TableViewMenuPage.Layout: return /* @__PURE__ */ jsx(LayoutMenu, {});
  		case TableViewMenuPage.Sort: return /* @__PURE__ */ jsxs(Fragment, { children: [/* @__PURE__ */ jsx(MenuHeader, {
  			id: "sort",
@@ -568,7 +568,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			onBack: () => table.setTableMenuState({
  				open: true,
  				page: null
-@@ -3165,7 +3165,7 @@ function TableMenu({ getReturnFocus }) {
+@@ -3165,7 +3165,7 @@
  	return /* @__PURE__ */ jsxs(Fragment, { children: [
  		/* @__PURE__ */ jsx(MenuHeader, {
  			id: "view-settings",
@@ -577,7 +577,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		}),
  		/* @__PURE__ */ jsxs(DropdownMenuGroup, { children: [
  			/* @__PURE__ */ jsx(DropdownMenuItem, {
-@@ -3177,14 +3177,14 @@ function TableMenu({ getReturnFocus }) {
+@@ -3177,14 +3177,14 @@
  			}),
  			/* @__PURE__ */ jsx(DropdownMenuItem, {
  				icon: /* @__PURE__ */ jsx(Icon.FilterSmall, {}),
@@ -594,7 +594,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				onClick: () => openMenu(TableViewMenuPage.Sort),
  				children: /* @__PURE__ */ jsx(MenuItemSelect, { children: sortingCount || "" })
  			}),
-@@ -3197,7 +3197,7 @@ function TableMenu({ getReturnFocus }) {
+@@ -3197,7 +3197,7 @@
  			})
  		] }),
  		/* @__PURE__ */ jsx(DropdownMenuSeparator, {}),
@@ -603,7 +603,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			closeOnClick: false,
  			icon: /* @__PURE__ */ jsx(Icon.Sliders, {}),
  			label: "Edit properties",
-@@ -3218,7 +3218,7 @@ function TableMenu({ getReturnFocus }) {
+@@ -3218,7 +3218,7 @@
  			onClick: table.toggleTableLocked
  		}), canViewTableLogs && /* @__PURE__ */ jsx(DropdownMenuItem, {
  			icon: /* @__PURE__ */ jsx(Icon.Clock, {}),
@@ -612,7 +612,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			onClick: () => {
  				const returnFocus = getReturnFocus?.();
  				table.setTableMenuState({
-@@ -3265,7 +3265,7 @@ function DateFormatMenu({ showIcon, format, onChange }) {
+@@ -3265,7 +3265,7 @@
  		role: "menuitem",
  		render: /* @__PURE__ */ jsx(MenuItem, {
  			icon: showIcon ? /* @__PURE__ */ jsx(Icon.ViewCalendar, {}) : void 0,
@@ -621,7 +621,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			children: /* @__PURE__ */ jsx(MenuItemSelect, { children: options$3.find((option) => option.value === format)?.label })
  		})
  	}), /* @__PURE__ */ jsx(DropdownMenuContent, {
-@@ -3303,7 +3303,7 @@ function TimeFormatMenu({ showIcon, format, onChange }) {
+@@ -3303,7 +3303,7 @@
  		nativeButton: false,
  		role: "menuitem",
  		render: /* @__PURE__ */ jsx(MenuItem, {
@@ -630,7 +630,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			icon: showIcon ? /* @__PURE__ */ jsx(Icon.Clock, {}) : void 0,
  			children: /* @__PURE__ */ jsx(MenuItemSelect, { children: options$2.find((option) => option.value === format)?.label })
  		})
-@@ -3326,7 +3326,7 @@ function TimeFormatMenu({ showIcon, format, onChange }) {
+@@ -3326,7 +3326,7 @@
  function DateConfigMenu({ config, onChange }) {
  	return /* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, {
  		icon: /* @__PURE__ */ jsx(Icon.Sliders, {}),
@@ -639,7 +639,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  	}), /* @__PURE__ */ jsx(DropdownMenuContent, {
  		sideOffset: -4,
  		className: "w-75",
-@@ -3367,7 +3367,7 @@ function DisplayTypeSelect({ type, onUpdate }) {
+@@ -3367,7 +3367,7 @@
  					})
  				}), /* @__PURE__ */ jsx("div", {
  					className: "text-xs/none",
@@ -648,7 +648,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				})]
  			}),
  			/* @__PURE__ */ jsxs(Button, {
-@@ -3410,25 +3410,25 @@ function DisplayTypeSelect({ type, onUpdate }) {
+@@ -3410,25 +3410,25 @@
  //#region src/plugins/number/number-config-menu/format-menu.tsx
  const options$1 = [
  	{
@@ -679,7 +679,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		children: /* @__PURE__ */ jsx("div", {
  			className: "text-muted",
  			children: options$1.find((option) => option.value === format)?.label
-@@ -3520,7 +3520,7 @@ function OptionSettings({ options: options$4, onUpdate }) {
+@@ -3520,7 +3520,7 @@
  //#region src/plugins/number/number-config-menu/rounding-menu.tsx
  const options = [
  	{
@@ -688,7 +688,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		value: "default"
  	},
  	{
-@@ -3550,7 +3550,7 @@ const options = [
+@@ -3550,7 +3550,7 @@
  ];
  function RoundingMenu({ round, onUpdate }) {
  	return /* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, {
@@ -697,7 +697,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		children: /* @__PURE__ */ jsx("div", {
  			className: "text-muted",
  			children: options.find((option) => option.value === round)?.label
-@@ -3574,7 +3574,7 @@ function RoundingMenu({ round, onUpdate }) {
+@@ -3574,7 +3574,7 @@
  function NumberConfigMenu({ config, onChange }) {
  	return /* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, {
  		icon: /* @__PURE__ */ jsx(Icon.Sliders, {}),
@@ -706,7 +706,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  	}), /* @__PURE__ */ jsxs(DropdownMenuContent, {
  		sideOffset: -4,
  		className: "w-75",
-@@ -3594,7 +3594,7 @@ function NumberConfigMenu({ config, onChange }) {
+@@ -3594,7 +3594,7 @@
  			})] }),
  			/* @__PURE__ */ jsx(DropdownMenuSeparator, {}),
  			/* @__PURE__ */ jsxs(DropdownMenuGroup, { children: [
@@ -715,7 +715,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				/* @__PURE__ */ jsx(DisplayTypeSelect, {
  					type: config.showAs,
  					onUpdate: (showAs) => onChange((v) => ({
-@@ -3649,14 +3649,14 @@ function OptionMeta({ option, validateName, onUpdate }) {
+@@ -3649,14 +3649,14 @@
  				...nameField.props,
  				endIcon: /* @__PURE__ */ jsx(TooltipPreset, {
  					side: "top",
@@ -732,7 +732,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  						children: /* @__PURE__ */ jsx(Icon.InfoFilled, { className: "fill-default/45 hover:fill-icon" })
  					})
  				})
-@@ -3692,13 +3692,13 @@ function SelectOptionMenu({ option, validateName, onDelete, onUpdate }) {
+@@ -3692,13 +3692,13 @@
  				variant: "warning",
  				onClick: onDelete,
  				icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
@@ -748,7 +748,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					value: key,
  					icon: /* @__PURE__ */ jsx(ColorIcon, { color: color.rgba }),
  					label: color.name
-@@ -3985,18 +3985,18 @@ const sortOptions = [
+@@ -3985,18 +3985,18 @@
  		value: "manual"
  	},
  	{
@@ -770,7 +770,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  	}), /* @__PURE__ */ jsx(DropdownMenuContent, {
  		sideOffset: -4,
  		className: "w-[250px]",
-@@ -4034,8 +4034,8 @@ function SelectConfigMenuContent({ multi, config, ...props }) {
+@@ -4034,8 +4034,8 @@
  	}, [nameField.ref, showInput]);
  	return /* @__PURE__ */ jsxs(Fragment, { children: [/* @__PURE__ */ jsx(DropdownMenuGroup, { children: /* @__PURE__ */ jsxs(DropdownMenuSub, { children: [/* @__PURE__ */ jsx(DropdownMenuSubTrigger, {
  		icon: /* @__PURE__ */ jsx(Icon.ArrowUpDown, {}),
@@ -781,7 +781,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		children: /* @__PURE__ */ jsx(MenuItemAction, {
  			className: "flex items-center text-muted",
  			children: sortOptions.find((o) => o.value === config.sort)?.label
-@@ -4056,13 +4056,13 @@ function SelectConfigMenuContent({ multi, config, ...props }) {
+@@ -4056,13 +4056,13 @@
  		})
  	})] }) }), /* @__PURE__ */ jsxs(DropdownMenuGroup, { children: [
  		/* @__PURE__ */ jsx(DropdownMenuLabel, {
@@ -797,7 +797,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				children: !showInput ? /* @__PURE__ */ jsx(Icon.Plus, { className: "size-3.5" }) : /* @__PURE__ */ jsx(Icon.Close, { className: "size-3.5" })
  			})
  		}),
-@@ -4200,7 +4200,7 @@ function BoardCard({ groupId, row }) {
+@@ -4200,7 +4200,7 @@
  						className: "min-h-6 w-auto max-w-full grow text-sm/normal font-medium wrap-break-word whitespace-pre-wrap",
  						children: titleCell.cell.value || /* @__PURE__ */ jsx("span", {
  							className: "text-muted",
@@ -806,7 +806,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  						})
  					})]
  				}),
-@@ -4259,7 +4259,7 @@ function BoardGroup({ index, row }) {
+@@ -4259,7 +4259,7 @@
  					size: "sm",
  					className: "w-full rounded-lg leading-tight text-secondary",
  					onClick: addRow,
@@ -815,7 +815,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				})
  			]
  		})
-@@ -4550,7 +4550,7 @@ function CalendarViewReady({ property: property$1, resources }) {
+@@ -4550,7 +4550,7 @@
  	const titleId = resources.columnOrder.find((id) => resources.columnsInfo[id]?.type === "title");
  	const events = rows.flatMap((row) => {
  		const title$2 = titleId ? String(row.original.properties[titleId]?.value ?? "") : "";
@@ -824,7 +824,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		return event ? [event] : [];
  	});
  	return /* @__PURE__ */ jsx(Table.Content, {
-@@ -4826,7 +4826,7 @@ function DndTableBodyContent({ locked, sorting, isResizingColumn, pendingDragEnd
+@@ -4826,7 +4826,7 @@
  			onClick: () => table.addRow(),
  			children: /* @__PURE__ */ jsxs("span", {
  				className: "sticky inset-s-(--table-view-row-action-gutter) inline-flex items-center text-sm text-muted opacity-100 transition-opacity duration-200",
@@ -833,7 +833,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			})
  		}),
  		/* @__PURE__ */ jsx(Dialog, {
-@@ -4961,7 +4961,7 @@ function ListViewContentInner({ sorting, pendingDragEndEvent, setPendingDragEndE
+@@ -4961,7 +4961,7 @@
  					variant: "cell",
  					className: "h-7.5 w-full rounded-md px-2 text-muted",
  					onClick: () => table.addRow(),
@@ -842,7 +842,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				})]
  			})
  		}), /* @__PURE__ */ jsx(Dialog, {
-@@ -5034,7 +5034,7 @@ function ViewNav({ rowId }) {
+@@ -5034,7 +5034,7 @@
  					children: /* @__PURE__ */ jsx(Button, {
  						variant: "hint",
  						className: "size-6",
@@ -851,7 +851,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  						onClick: () => table.openRowInFullPage(rowId),
  						children: /* @__PURE__ */ jsx(Icon.ArrowExpandDiagonalSmall, { className: "size-5 fill-icon" })
  					})
-@@ -5045,7 +5045,7 @@ function ViewNav({ rowId }) {
+@@ -5045,7 +5045,7 @@
  				}),
  				/* @__PURE__ */ jsxs(DropdownMenu, { children: [/* @__PURE__ */ jsx(TooltipPreset, {
  					className: "z-999",
@@ -860,7 +860,41 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					children: /* @__PURE__ */ jsx(DropdownMenuTrigger, { render: /* @__PURE__ */ jsx(Button, {
  						variant: "hint",
  						className: "size-6",
-@@ -5208,7 +5208,7 @@ function DialogView({ children }) {
+@@ -5106,10 +5106,29 @@
+ 					onClick: () => nextRowId && table.openRow(nextRowId),
+ 					children: /* @__PURE__ */ jsx(Icon.Chevron, { className: "fill-icon" })
+ 				}),
+-				/* @__PURE__ */ jsx(Button, {
+-					variant: "hint",
+-					className: "size-6",
+-					children: /* @__PURE__ */ jsx(Icon.Dots, { className: "fill-icon" })
++								/* @__PURE__ */ jsx(DropdownMenu, {
++					children: [
++						/* @__PURE__ */ jsx(DropdownMenuTrigger, {
++							render: /* @__PURE__ */ jsx(Button, {
++								variant: "hint",
++								className: "size-6",
++								"aria-label": "Ações da linha",
++								children: /* @__PURE__ */ jsx(Icon.Dots, { className: "fill-icon" })
++							})
++						}),
++						/* @__PURE__ */ jsx(DropdownMenuContent, {
++							className: "z-999",
++							children: /* @__PURE__ */ jsx(DropdownMenuItem, {
++								variant: "warning",
++								icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
++								label: "Excluir",
++								onClick: () => {
++									table.deleteRow(rowId);
++									table.openRow(null);
++								}
++							})
++						})
++					]
+ 				})
+ 			]
+ 		})]
+@@ -5208,7 +5227,7 @@
  							/* @__PURE__ */ jsx(DialogTitle, {
  								typography: "h1",
  								className: "col-start-2 mb-2 text-left",
@@ -869,7 +903,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  							}),
  							/* @__PURE__ */ jsx("div", {
  								className: "col-start-2 mb-3 min-w-0",
-@@ -5251,7 +5251,7 @@ function FullView({ children }) {
+@@ -5251,7 +5270,7 @@
  					children: [
  						/* @__PURE__ */ jsx("div", {
  							className: cn(typography("h1"), "col-start-2 mb-2 text-left"),
@@ -878,7 +912,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  						}),
  						/* @__PURE__ */ jsx("div", {
  							className: "col-start-2 mb-3 min-w-0",
-@@ -5291,7 +5291,7 @@ function SideView({ children }) {
+@@ -5291,7 +5310,7 @@
  							/* @__PURE__ */ jsx(SheetTitle, {
  								typography: "h1",
  								className: "col-start-2 mb-2",
@@ -887,7 +921,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  							}),
  							/* @__PURE__ */ jsx("div", {
  								className: "col-start-2 mb-3 min-w-0",
-@@ -5719,7 +5719,7 @@ function TimelineSidebarRows({ sortable }) {
+@@ -5719,7 +5738,7 @@
  		const { colId: titleColumnId, cell: titleDataCell } = row.getTitleCell();
  		const titleCell = row.getAllCells().find((candidate) => candidate.column.id === titleColumnId);
  		if (!titleCell) return null;
@@ -896,7 +930,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		const wrapped = titleCell.getInfo().wrapped;
  		const index = nextIndexByGroup.get(row.parentId) ?? 0;
  		nextIndexByGroup.set(row.parentId, index + 1);
-@@ -5776,7 +5776,7 @@ function TimelineTrackRow({ row, propertyId }) {
+@@ -5776,7 +5795,7 @@
  		style: { height: 44 }
  	});
  	const { cell } = row.getTitleCell();
@@ -905,7 +939,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  	const feature = toTimelineFeature(row.original, propertyId, title$2);
  	return /* @__PURE__ */ jsx(table.Subscribe, {
  		selector: (state) => ({
-@@ -6098,14 +6098,14 @@ function ToolbarContent({ className }) {
+@@ -6098,14 +6117,14 @@
  		className: cn("flex items-center justify-end gap-0.5", className),
  		children: [
  			/* @__PURE__ */ jsx(TooltipPreset, {
@@ -922,7 +956,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  						className: "[&_svg]:fill-current",
  						children: /* @__PURE__ */ jsx(Icon.FilterSmall, {})
  					})
-@@ -6116,19 +6116,19 @@ function ToolbarContent({ className }) {
+@@ -6116,19 +6135,19 @@
  				handle: sortMenu.handle,
  				render: /* @__PURE__ */ jsx(Button, {
  					variant: "nav-icon",
@@ -945,7 +979,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			}),
  			/* @__PURE__ */ jsxs(DropdownMenu, {
  				open: tableMenu.open,
-@@ -6138,7 +6138,7 @@ function ToolbarContent({ className }) {
+@@ -6138,7 +6157,7 @@
  				}),
  				children: [/* @__PURE__ */ jsx(DropdownMenuTrigger, { render: /* @__PURE__ */ jsx(Button, {
  					variant: "nav-icon",
@@ -954,16 +988,20 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					ref: settingsRef,
  					className: "[&_svg]:fill-current",
  					children: /* @__PURE__ */ jsx(Icon.SlidersSmall, {})
-@@ -6152,7 +6152,7 @@ function ToolbarContent({ className }) {
+@@ -6152,7 +6171,11 @@
  				variant: "blue",
  				size: "sm",
  				className: "h-7 px-2",
 -				children: ["New", /* @__PURE__ */ jsx(Icon.Chevron, {
++				onClick: () => {
++					const id = table.addRow();
++					if (id) table.openRow(id);
++				},
 +				children: ["Novo", /* @__PURE__ */ jsx(Icon.Chevron, {
  					side: "down",
  					className: "size-3 fill-current"
  				})]
-@@ -6168,11 +6168,11 @@ function ToolbarSearch() {
+@@ -6168,11 +6191,11 @@
  	return /* @__PURE__ */ jsxs("div", {
  		className: "flex items-center",
  		children: [/* @__PURE__ */ jsx(TooltipPreset, {
@@ -977,7 +1015,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				"aria-controls": searchInputId,
  				"aria-expanded": searchOpen,
  				className: "[&_svg]:fill-current",
-@@ -6193,7 +6193,7 @@ function ToolbarSearch() {
+@@ -6193,7 +6216,7 @@
  				"aria-label": "Search table",
  				"aria-hidden": !searchOpen,
  				tabIndex: searchOpen ? void 0 : -1,
@@ -986,7 +1024,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				value: globalFilter,
  				onChange: (e) => table.setGlobalFilter(e.target.value),
  				onCancel: table.resetGlobalFilter
-@@ -6302,7 +6302,7 @@ function BulkActionMenu({ rowIds }) {
+@@ -6302,7 +6325,7 @@
  	const { table } = useTableViewCtx();
  	const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
  	const rowCount = rowIds.length;
@@ -995,7 +1033,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  	const duplicateRows = () => table.duplicateRows(rowIds);
  	const deleteRows = () => {
  		table.deleteRows(rowIds);
-@@ -6310,14 +6310,14 @@ function BulkActionMenu({ rowIds }) {
+@@ -6310,14 +6333,14 @@
  	};
  	return /* @__PURE__ */ jsxs(Fragment, { children: [
  		/* @__PURE__ */ jsx(Button, {
@@ -1012,7 +1050,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			variant: "hint",
  			className: "h-full shrink-0 rounded-none px-2",
  			children: /* @__PURE__ */ jsx(Icon.Dots, { className: "size-4 fill-menu-icon" })
-@@ -6326,12 +6326,12 @@ function BulkActionMenu({ rowIds }) {
+@@ -6326,12 +6349,12 @@
  			className: "w-44",
  			children: /* @__PURE__ */ jsxs(DropdownMenuGroup, { children: [/* @__PURE__ */ jsx(DropdownMenuItem, {
  				icon: /* @__PURE__ */ jsx(Icon.Duplicate, {}),
@@ -1027,7 +1065,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				variant: "error",
  				onClick: () => setShowDeleteConfirm(true)
  			})] })
-@@ -6340,9 +6340,9 @@ function BulkActionMenu({ rowIds }) {
+@@ -6340,9 +6363,9 @@
  			open: showDeleteConfirm,
  			onOpenChange: setShowDeleteConfirm,
  			children: /* @__PURE__ */ jsx(AlertModal, {
@@ -1040,7 +1078,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				onTrigger: deleteRows
  			})
  		})
-@@ -6377,9 +6377,9 @@ function BulkEditBar({ disabled }) {
+@@ -6377,9 +6400,9 @@
  						className: "inline-flex h-full items-center border-r px-2.5 text-sm text-blue",
  						children: [
  							rowIds.length,
@@ -1052,7 +1090,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  						]
  					}),
  					columns.map((column) => /* @__PURE__ */ jsx(BulkEditColumn, {
-@@ -6448,7 +6448,7 @@ function TableFooterCell({ column }) {
+@@ -6448,7 +6471,7 @@
  		className: "flex",
  		style: { width: props.width },
  		children: /* @__PURE__ */ jsxs(DropdownMenu, { children: [/* @__PURE__ */ jsx(DropdownMenuTrigger, { render: /* @__PURE__ */ jsx(Button, {
@@ -1061,7 +1099,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			tabIndex: 0,
  			variant: "cell",
  			className: "h-8 w-full justify-end overflow-hidden pr-2 select-auto",
-@@ -6475,7 +6475,7 @@ function CountDisplay({ id, type }) {
+@@ -6475,7 +6498,7 @@
  					className: "flex items-center",
  					children: [/* @__PURE__ */ jsx("span", {
  						className: "text-muted",
@@ -1070,7 +1108,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					}), /* @__PURE__ */ jsx(Icon.Chevron, {
  						side: "down",
  						className: "mt-px ml-1 block size-2.5 shrink-0 fill-muted"
-@@ -7135,12 +7135,12 @@ function CopyButton({ className, value }) {
+@@ -7135,12 +7158,12 @@
  			id: "quick-action-container",
  			className: "pointer-events-auto sticky right-1 flex bg-transparent",
  			children: /* @__PURE__ */ jsx(TooltipPreset, {
@@ -1085,7 +1123,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					size: "xs",
  					className: "rounded-md bg-main text-secondary shadow-sm",
  					onClick: (e) => {
-@@ -7276,7 +7276,7 @@ function GroupActionsContent({ className, row }) {
+@@ -7276,7 +7299,7 @@
  							label: "Hide aggregation"
  						} : {
  							icon: /* @__PURE__ */ jsx(Icon.Eye, {}),
@@ -1094,7 +1132,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  						},
  						onClick: () => row.toggleGroupAggregates()
  					}),
-@@ -7287,7 +7287,7 @@ function GroupActionsContent({ className, row }) {
+@@ -7287,7 +7310,7 @@
  					}),
  					/* @__PURE__ */ jsx(DropdownMenuItem, {
  						icon: /* @__PURE__ */ jsx(Icon.Trash, {}),
@@ -1103,7 +1141,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  						closeOnClick: false,
  						onClick: () => setShowDeleteConfirm(true)
  					})
-@@ -7298,8 +7298,8 @@ function GroupActionsContent({ className, row }) {
+@@ -7298,8 +7321,8 @@
  				onOpenChange: setShowDeleteConfirm,
  				children: /* @__PURE__ */ jsx(AlertModal, {
  					title: "Are you sure? All rows inside this group will be deleted.",
@@ -1114,7 +1152,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					onTrigger: deleteRows
  				})
  			}),
-@@ -7307,7 +7307,7 @@ function GroupActionsContent({ className, row }) {
+@@ -7307,7 +7330,7 @@
  				description: "Create new",
  				side: "top",
  				children: /* @__PURE__ */ jsx(Button, {
@@ -1123,7 +1161,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					variant: "hint",
  					className: "size-6",
  					onPointerDown: (e) => e.stopPropagation(),
-@@ -7488,13 +7488,13 @@ function PropMeta({ propId, type }) {
+@@ -7488,13 +7511,13 @@
  						...nameField.props,
  						endIcon: /* @__PURE__ */ jsx(TooltipPreset, {
  							side: "top",
@@ -1139,7 +1177,16 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  								onClick: toggleDesc,
  								children: /* @__PURE__ */ jsx(Icon.InfoFilled, { className: "fill-default/45 hover:fill-icon" })
  							})
-@@ -7622,7 +7622,7 @@ function RowActionGroup({ className, row }) {
+@@ -7530,7 +7553,7 @@
+ }
+ function TableContent({ className, ...props }) {
+ 	return /* @__PURE__ */ jsx("div", {
+-		className: cn("[--table-view-row-action-gutter:96px]", "px-(--table-view-row-action-gutter)", className),
++		className: cn("[--table-view-row-action-gutter:16px] md:[--table-view-row-action-gutter:96px]", "px-(--table-view-row-action-gutter)", className),
+ 		...props
+ 	});
+ }
+@@ -7622,7 +7645,7 @@
  				className: "text-center",
  				children: /* @__PURE__ */ jsx(Button, {
  					variant: "hint",
@@ -1148,7 +1195,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					className: "size-6",
  					onClick: addNextRow,
  					children: /* @__PURE__ */ jsx(Icon.Plus, { className: "size-3.5 fill-icon" })
-@@ -7637,7 +7637,7 @@ function RowActionGroup({ className, row }) {
+@@ -7637,7 +7660,7 @@
  					children: /* @__PURE__ */ jsx(PopoverTrigger, {
  						ref: triggerRef,
  						render: /* @__PURE__ */ jsx(Sortable.Handle, {
@@ -1157,7 +1204,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  							className: "h-6 w-4.5"
  						})
  					})
-@@ -8165,7 +8165,7 @@ function DateTimePicker({ data, config, onChange, onConfigChange }) {
+@@ -8165,7 +8188,7 @@
  			/* @__PURE__ */ jsx(Separator, {}),
  			/* @__PURE__ */ jsxs(MenuGroup, { children: [
  				/* @__PURE__ */ jsx(MenuItemSwitch, {
@@ -1166,7 +1213,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					checked: data.endDate,
  					onCheckedChange: (endDate) => onChange((v) => ({
  						...v,
-@@ -8181,7 +8181,7 @@ function DateTimePicker({ data, config, onChange, onConfigChange }) {
+@@ -8181,7 +8204,7 @@
  					}))
  				}),
  				/* @__PURE__ */ jsx(MenuItemSwitch, {
@@ -1175,7 +1222,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					checked: data.includeTime,
  					onCheckedChange: (includeTime) => onChange((v) => ({
  						...v,
-@@ -8201,14 +8201,14 @@ function DateTimePicker({ data, config, onChange, onConfigChange }) {
+@@ -8201,14 +8224,14 @@
  						tz
  					})),
  					renderTrigger: ({ gmt }) => /* @__PURE__ */ jsx(MenuItem, {
@@ -1192,7 +1239,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				onClick: () => onChange((v) => ({
  					...v,
  					start: void 0,
-@@ -8809,7 +8809,7 @@ function number$1() {
+@@ -8809,7 +8832,7 @@
  	return {
  		id: "number",
  		meta: {
@@ -1201,7 +1248,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			desc: "Accepts numbers. These can also be formatted as currency or progress bars. Useful for tracking counts, prices and completion.",
  			icon: /* @__PURE__ */ jsx(DefaultIcon, {
  				type: "number",
-@@ -8817,7 +8817,7 @@ function number$1() {
+@@ -8817,7 +8840,7 @@
  			})
  		},
  		default: {
@@ -1210,7 +1257,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			icon: /* @__PURE__ */ jsx(DefaultIcon, { type: "number" })
  		},
  		renderCell: createCellRenderer(renderCell),
-@@ -8912,12 +8912,12 @@ function OptionItem({ index, option, draggable, onSelect, onUpdate, onDelete, va
+@@ -8912,12 +8935,12 @@
  function SelectMenu({ menu, onClose }) {
  	const { config, optionSuggestion, tags, search, setSearch, handleTagsChange, selectTag, addOption, reorderOptions, validateOptionName, updateOption, deleteOption } = menu;
  	const items = [{
@@ -1225,7 +1272,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  		items: [optionSuggestion.name],
  		creatable: true
  	});
-@@ -9256,7 +9256,7 @@ function select$1() {
+@@ -9256,7 +9279,7 @@
  	return {
  		id: "select",
  		meta: {
@@ -1234,7 +1281,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			desc: "Use a select property to choose one option from a predefined list. Great for categorization.",
  			icon: /* @__PURE__ */ jsx(DefaultIcon, {
  				type: "select",
-@@ -9264,7 +9264,7 @@ function select$1() {
+@@ -9264,7 +9287,7 @@
  			})
  		},
  		default: {
@@ -1243,7 +1290,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			icon: /* @__PURE__ */ jsx(DefaultIcon, { type: "select" })
  		},
  		renderCell: createCellRenderer(renderCell),
-@@ -9489,7 +9489,7 @@ function TitleTableSlot({ value, props, row, icon: icon$1 }) {
+@@ -9489,7 +9512,7 @@
  					icon: icon$1,
  					className: "contents"
  				}), /* @__PURE__ */ jsx("span", {
@@ -1252,7 +1299,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  					children: value
  				})]
  			})]
-@@ -9559,7 +9559,7 @@ function TitleCompactSlot({ value, props: cellProps, icon: icon$1 }) {
+@@ -9559,7 +9582,7 @@
  				className: "mr-[5px] ml-1 inline leading-normal font-medium",
  				children: data ? value : /* @__PURE__ */ jsx("span", {
  					className: "text-muted",
@@ -1261,7 +1308,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				})
  			})]
  		})]
-@@ -9574,7 +9574,7 @@ function TitleConfig({ config, onChange }) {
+@@ -9574,7 +9597,7 @@
  		htmlFor: id,
  		children: /* @__PURE__ */ jsx(DropdownMenuItem, {
  			icon: /* @__PURE__ */ jsx(Icon.EmojiFace, {}),
@@ -1270,7 +1317,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			children: /* @__PURE__ */ jsx(MenuItemAction, {
  				className: "flex items-center",
  				children: /* @__PURE__ */ jsx(Switch, {
-@@ -9607,7 +9607,7 @@ function title$1() {
+@@ -9607,7 +9630,7 @@
  		});
  		switch (props.surface) {
  			case "table": return /* @__PURE__ */ jsx(CellTriggerScope, {
@@ -1279,7 +1326,7 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  				className: triggerClassName,
  				children: /* @__PURE__ */ jsx(TitleTableSlot, {
  					value: props.data,
-@@ -9634,8 +9634,8 @@ function title$1() {
+@@ -9634,8 +9657,8 @@
  				icon: icon$1,
  				className: "contents"
  			}), /* @__PURE__ */ jsx("span", {
@@ -1290,3 +1337,15 @@ index 643ff7fe16241a08f410ecc13552678d297846b6..f7187d8667e36307c635c03a1d9301b3
  			})] });
  			default: return null;
  		}
+diff --git a/dist/plugins-BCCX7gik.mjs b/dist/plugins-BCCX7gik.mjs
+--- a/dist/plugins-BCCX7gik.mjs
++++ b/dist/plugins-BCCX7gik.mjs
+@@ -9512,7 +9512,7 @@
+ 					icon: icon$1,
+ 					className: "contents"
+ 				}), /* @__PURE__ */ jsx("span", {
+-					title: value || void 0, className: cn("mr-[5px] ml-1 inline leading-normal font-medium underline decoration-muted underline-offset-2", wrappedClassName(wrapped)),
++					title: value || void 0, className: cn("mr-[5px] ml-1 inline leading-normal font-medium", wrappedClassName(wrapped)),
+ 					children: value
+ 				})]
+ 			})]
