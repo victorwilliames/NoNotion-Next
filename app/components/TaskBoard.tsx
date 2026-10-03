@@ -6,9 +6,12 @@ import type { PartialTableViewState } from "@notion-kit/table-view";
 import { TASK_COLUMNS } from "@/lib/tasks/columns";
 import type { TaskRow } from "@/lib/tasks/types";
 
+type Table = ReturnType<typeof useTableViewCtx>["table"];
+
 type Props = {
   data: TaskRow[];
   onDataChange: (rows: TaskRow[]) => void;
+  onTableReady?: (table: Table | null) => void;
 };
 
 /**
@@ -23,6 +26,16 @@ function BoardGrouping() {
   return null;
 }
 
+/** Captura a instância da tabela do contexto e expõe via callback. */
+function TableCapture({ onTableReady }: { onTableReady?: (table: Table | null) => void }) {
+  const { table } = useTableViewCtx();
+  useEffect(() => {
+    onTableReady?.(table);
+    return () => onTableReady?.(null);
+  }, [table, onTableReady]);
+  return null;
+}
+
 /**
  * Aba Kanban — o mesmo TableView em layout de board, agrupado por status.
  *
@@ -31,7 +44,7 @@ function BoardGrouping() {
  * remontar; o `defaultView` é o caminho documentado. Remontar perde scroll e
  * seleção ao trocar de aba, mas é simples e não depende de API interna.
  */
-export function TaskBoard({ data, onDataChange }: Props) {
+export function TaskBoard({ data, onDataChange, onTableReady }: Props) {
   return (
     <TableView
       defaultData={data}
@@ -47,6 +60,7 @@ export function TaskBoard({ data, onDataChange }: Props) {
       }
     >
       <BoardGrouping />
+      <TableCapture onTableReady={onTableReady} />
     </TableView>
   );
 }
