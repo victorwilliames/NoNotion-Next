@@ -12,7 +12,7 @@ patchedDependencies:
     hash: 0c1f2505c4b1e5d8746a0c4e464874afbfe0af8610e5dd962378854b9d1056bd
     path: patches/@notion-kit__table-hook@1.2.0.patch
   '@notion-kit/table-view@1.2.0':
-    hash: 026b3fe783e4bc93c3287150919686f507e15d0a3ae9460fd2d760098362ea61
+    hash: a0b83959133dccc7516e12cc19d6a0e9be02e33ab9bff09a1425193834c8a085
     path: patches/@notion-kit__table-view@1.2.0.patch
 
 importers:
@@ -27,7 +27,7 @@ importers:
         version: 0.5.0(patch_hash=4f28ab6bb3efeffe178ad20693b442719d70799774531c97bb320b10defc6b1e)
       '@notion-kit/table-view':
         specifier: 1.2.0
-        version: 1.2.0(patch_hash=026b3fe783e4bc93c3287150919686f507e15d0a3ae9460fd2d760098362ea61)(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.3.0)(ajv-formats@2.1.1(ajv@8.20.0))(ajv@8.20.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+        version: 1.2.0(patch_hash=a0b83959133dccc7516e12cc19d6a0e9be02e33ab9bff09a1425193834c8a085)(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.3.0)(ajv-formats@2.1.1(ajv@8.20.0))(ajv@8.20.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@notion-kit/ui':
         specifier: ^1.2.0
         version: 1.2.0(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.3.0)(ajv-formats@2.1.1(ajv@8.20.0))(ajv@8.20.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(zod@4.6.5)
@@ -4031,7 +4031,7 @@ snapshots:
       - vest
       - yup
 
-  '@notion-kit/table-view@1.2.0(patch_hash=026b3fe783e4bc93c3287150919686f507e15d0a3ae9460fd2d760098362ea61)(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.3.0)(ajv-formats@2.1.1(ajv@8.20.0))(ajv@8.20.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
+  '@notion-kit/table-view@1.2.0(patch_hash=a0b83959133dccc7516e12cc19d6a0e9be02e33ab9bff09a1425193834c8a085)(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.3.0)(ajv-formats@2.1.1(ajv@8.20.0))(ajv@8.20.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)':
     dependencies:
       '@date-fns/tz': 1.5.0
       '@dnd-kit/react': 0.5.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
