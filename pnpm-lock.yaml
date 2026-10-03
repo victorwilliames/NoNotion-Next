@@ -14,9 +14,6 @@ patchedDependencies:
   '@notion-kit/table-view@1.2.0':
     hash: 026b3fe783e4bc93c3287150919686f507e15d0a3ae9460fd2d760098362ea61
     path: patches/@notion-kit__table-view@1.2.0.patch
-  '@notion-kit/utils@1.2.0':
-    hash: 8382c554ba4242cd30ec9e67a71849c8b5ae3fb3718eeef3292ede6da4833bad
-    path: patches/@notion-kit__utils@1.2.0.patch
 
 importers:
 
@@ -3998,7 +3995,7 @@ snapshots:
       '@dnd-kit/react': 0.5.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@notion-kit/cn': 1.2.0
       '@notion-kit/ui': 1.2.0(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.3.0)(ajv-formats@2.1.1(ajv@8.20.0))(ajv@8.20.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(zod@4.6.5)
-      '@notion-kit/utils': 1.2.0(patch_hash=8382c554ba4242cd30ec9e67a71849c8b5ae3fb3718eeef3292ede6da4833bad)
+      '@notion-kit/utils': 1.2.0
       '@tanstack/react-table': 9.2.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@tanstack/table-core': 9.2.4
       date-fns: 4.4.0
@@ -4043,7 +4040,7 @@ snapshots:
       '@notion-kit/icons': 1.2.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@notion-kit/table-hook': 1.2.0(patch_hash=0c1f2505c4b1e5d8746a0c4e464874afbfe0af8610e5dd962378854b9d1056bd)(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.3.0)(ajv-formats@2.1.1(ajv@8.20.0))(ajv@8.20.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@notion-kit/ui': 1.2.0(@babel/core@7.29.7)(@babel/template@7.29.7)(@types/react@19.3.0)(ajv-formats@2.1.1(ajv@8.20.0))(ajv@8.20.0)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)(zod@4.6.5)
-      '@notion-kit/utils': 1.2.0(patch_hash=8382c554ba4242cd30ec9e67a71849c8b5ae3fb3718eeef3292ede6da4833bad)
+      '@notion-kit/utils': 1.2.0
       '@tanstack/react-table': 9.2.4(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       react: 19.2.8
       react-dom: 19.2.8(react@19.2.8)
@@ -4093,7 +4090,7 @@ snapshots:
       '@notion-kit/hooks': 1.2.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@notion-kit/icons': 1.2.0(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@notion-kit/schemas': 1.2.0
-      '@notion-kit/utils': 1.2.0(patch_hash=8382c554ba4242cd30ec9e67a71849c8b5ae3fb3718eeef3292ede6da4833bad)
+      '@notion-kit/utils': 1.2.0
       '@tanstack/react-virtual': 3.14.13(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       '@uidotdev/usehooks': 2.4.1(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
       date-fns: 4.4.0
@@ -4139,7 +4136,7 @@ snapshots:
       - vest
       - yup
 
-  '@notion-kit/utils@1.2.0(patch_hash=8382c554ba4242cd30ec9e67a71849c8b5ae3fb3718eeef3292ede6da4833bad)':
+  '@notion-kit/utils@1.2.0':
     dependencies:
       '@date-fns/tz': 1.5.0
       date-fns: 4.1.0
