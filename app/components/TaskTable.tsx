@@ -6,15 +6,13 @@ import type { TaskRow } from "@/lib/tasks/types";
 
 type Props = {
   data: TaskRow[];
-  onDataChange: (rows: TaskRow[]) => void;
 };
 
 /** Aba Tabela — TableView oficial do kit em layout de tabela. */
-export function TaskTable({ data, onDataChange }: Props) {
+export function TaskTable({ data }: Props) {
   return (
     <TableView
-      data={data}
-      onDataChange={(change) => onDataChange(change.next)}
+      defaultData={data}
       defaultProperties={TASK_COLUMNS}
       defaultColumn={{ size: 280 }}
       defaultView={{ layout: "table" }}
