@@ -3,10 +3,6 @@
 @import "shadcn/tailwind.css";
 @import "@notion-kit/ui/style.css";
 
-/* O Tailwind precisa enxergar as classes que o @notion-kit/table-view usa no
-   bundle (ex: o token responsivo de gutter), pra gerar o CSS delas. */
-@source "../../node_modules/@notion-kit/table-view/dist/plugins-BCCX7gik.mjs";
-
 /* O CSS do kit vem por último de propósito: as variáveis dele
    (--muted, --primary, etc.) precisam vencer as do tema shadcn,
    que usa os mesmos nomes. */
