@@ -30,7 +30,7 @@ type Props = {
 export function DatabaseHeader({ title, view, onViewChange }: Props) {
   return (
     <div>
-      <h1 className="text-2xl font-bold leading-[1.25] tracking-tight md:text-[32px]">{title}</h1>
+      <h1 className="text-[32px] font-bold leading-[1.25] tracking-tight">{title}</h1>
       <div role="tablist" aria-label="Views" className="mt-4 flex items-center gap-1">
         {VIEWS.map(({ id, label, Icon }) => {
           const active = view === id;

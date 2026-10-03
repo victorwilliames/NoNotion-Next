@@ -8,6 +8,7 @@ import type { TaskRow } from "@/lib/tasks/types";
 
 type Props = {
   data: TaskRow[];
+  onDataChange: (rows: TaskRow[]) => void;
 };
 
 /**
@@ -30,10 +31,11 @@ function BoardGrouping() {
  * remontar; o `defaultView` é o caminho documentado. Remontar perde scroll e
  * seleção ao trocar de aba, mas é simples e não depende de API interna.
  */
-export function TaskBoard({ data }: Props) {
+export function TaskBoard({ data, onDataChange }: Props) {
   return (
     <TableView
       defaultData={data}
+      onDataChange={(change) => onDataChange(change.next)}
       defaultProperties={TASK_COLUMNS}
       defaultView={
         {
